@@ -1,16 +1,21 @@
-import React from 'react'
+//import React from 'react'
 import db from '../appwrite/databases'
+import PropTypes from 'prop-types'
+import "../styles/CreatePost.css"
+import Navbar from './Navbar'
 
 function PostForm({ setPosts }) {
 
   const handleAdd = async(e) => {
     e.preventDefault()
+    const postTitle = e.target.title.value
     const postBody = e.target.body.value
 
+    if(postTitle === "")return
     if(postBody === "") return
 
     try{
-      const payload = {body:postBody}
+      const payload = {title:postTitle, body:postBody}
       const response = await db.posts.create(payload)
       setPosts((prevState) => [response, ...prevState])
 
@@ -22,17 +27,32 @@ function PostForm({ setPosts }) {
   }
 
   return (
-    <form onSubmit={handleAdd}>
+    <section className="createPostPage">
+    <Navbar />
+
+    <div className="formDiv">
+      <form className = "postForm" onSubmit={handleAdd}>
+
+      <input
+      type="text"
+      name="title"
+      placeholder="title"/>
 
       <input
       type="text"
       name="body"
-      placeholder="placeholder"
+      placeholder="body"
       />
       <button type="submit">Add post</button>
 
-    </form>
+     </form>
+    </div>
+    </section>
   )
+}
+
+PostForm.propTypes = {
+  setPosts: PropTypes.func.isRequired
 }
 
 export default PostForm

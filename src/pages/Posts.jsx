@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import db from "../appwrite/databases";
-import PostForm from "../components/PostForm";
+//import PostForm from "../components/PostForm";
 import { Query } from "appwrite";
+import Post from "../components/Post";
+import "../styles/Post.css"
 
 
 export default function Posts() {
@@ -19,17 +21,18 @@ export default function Posts() {
 
     setPosts(response.documents)
   }
-
+//<PostForm setPosts={setPosts} />
   return (
-  <section>
-    <PostForm setPosts={setPosts} />
-
-    <div>
+    <div className="posts-div">
       {posts.map(post => (
-        <div key={post.$id}>{post.body}</div>
+        <Post key={post.$id}
+        setPosts={setPosts}
+        postData={post}
+        />
+        //<div key={post.$id}>{post.body}</div>
       ))}
     </div>
 
-    </section>
+
   )
 }

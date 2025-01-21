@@ -1,0 +1,27 @@
+/* Navbar.css */
+.navbar-section{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: whitesmoke;
+  box-shadow: 0 5px 6px -6px black;
+}
+
+.navbar-div{
+  display: flex;
+  gap: 10px;
+}
+
+.navbar-div button{
+  height: 50px;
+  width: 150px;
+  font-size: large;
+  border: none;
+  background-color: whitesmoke;
+}
+
+.navbar-div button:hover{
+  background-color: aliceblue;
+  border-left: 2px solid black;
+  letter-spacing: 2px;
+  transition: all 200ms ease-in-out;
+}

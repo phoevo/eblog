@@ -1,0 +1,20 @@
+.posts-div{
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-section{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+border: 2px solid red;
+margin-top: 100px;
+width: 70%;
+}
+
+.postTitle{
+  font-size: xx-large;
+}

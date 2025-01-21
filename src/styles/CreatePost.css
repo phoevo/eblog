@@ -1,0 +1,13 @@
+.createPostPage{
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.postForm{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  justify-content: center;
+  align-items: center;
+}
