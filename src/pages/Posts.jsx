@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import db from "../appwrite/databases";
-//import PostForm from "../components/PostForm";
 import { Query } from "appwrite";
 import Post from "../components/Post";
 import "../styles/Post.css"
+import PropTypes from "prop-types";
 
 
-export default function Posts() {
+export default function Posts({posts, setPosts}) {
 
-  const[posts, setPosts] = useState([]);
 
   useEffect(() => {
     init()
@@ -21,7 +20,7 @@ export default function Posts() {
 
     setPosts(response.documents)
   }
-//<PostForm setPosts={setPosts} />
+
   return (
     <div className="posts-div">
       {posts.map(post => (
@@ -36,3 +35,14 @@ export default function Posts() {
 
   )
 }
+
+Posts.propTypes = {
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      $id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  setPosts: PropTypes.func.isRequired,
+};

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import "../styles/CreatePost.css"
 import Navbar from './Navbar'
 
-function PostForm({ setPosts }) {
+
+function PostForm({setPosts}) {
 
   const handleAdd = async(e) => {
     e.preventDefault()
@@ -14,12 +15,16 @@ function PostForm({ setPosts }) {
     if(postTitle === "")return
     if(postBody === "") return
 
+
     try{
       const payload = {title:postTitle, body:postBody}
       const response = await db.posts.create(payload)
       setPosts((prevState) => [response, ...prevState])
 
+
       e.target.reset()
+
+
     }catch(error){
       console.error(error)
     }
@@ -28,7 +33,9 @@ function PostForm({ setPosts }) {
 
   return (
     <section className="createPostPage">
-    <Navbar />
+
+      <Navbar />
+
 
     <div className="formDiv">
       <form className = "postForm" onSubmit={handleAdd}>
