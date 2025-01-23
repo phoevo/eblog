@@ -13,14 +13,14 @@
 
 .navbar-div button{
   height: 50px;
-  width: 150px;
+  width: 100px;
   font-size: large;
   border: none;
   background-color: whitesmoke;
 }
 
 .navbar-div button:hover{
-  background-color: aliceblue;
+  background-color: white;
   border-left: 2px solid black;
   letter-spacing: 2px;
   transition: all 200ms ease-in-out;

@@ -3,7 +3,7 @@ import db from '../appwrite/databases'
 import PropTypes from 'prop-types'
 import "../styles/Post.css"
 
-function Post({setPosts, postData}) {
+function Post({setPosts, postData, loggedin}) {
 
   // eslint-disable-next-line no-unused-vars
   const[post, setPost] = useState(postData)
@@ -19,13 +19,16 @@ function Post({setPosts, postData}) {
     <section className="post-section">
       <h1 className="postTitle">{postData.title}</h1>
       <div className="postBody">{postData.body} </div>
-      <button onClick={handleDelete}>Delete</button>
+      {loggedin && (<button className="postDelete" onClick={handleDelete}>Delete</button>)}
+
+
 
     </section>
   )
 }
 
 Post.propTypes = {
+  loggedin: PropTypes.bool,
   setPosts: PropTypes.func.isRequired,
   postData: PropTypes.shape({
     $id: PropTypes.string.isRequired,

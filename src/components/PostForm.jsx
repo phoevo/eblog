@@ -2,8 +2,6 @@
 import db from '../appwrite/databases'
 import PropTypes from 'prop-types'
 import "../styles/CreatePost.css"
-import Navbar from './Navbar'
-
 
 function PostForm({setPosts}) {
 
@@ -34,32 +32,31 @@ function PostForm({setPosts}) {
   return (
     <section className="createPostPage">
 
-      <Navbar />
-
-
     <div className="formDiv">
-      <form className = "postForm" onSubmit={handleAdd}>
 
-      <input
+      <form className = "postForm" onSubmit={handleAdd}>
+      <input className='titleInput'
       type="text"
       name="title"
       placeholder="title"/>
 
-      <input
-      type="text"
+      <textarea className='bodyInput'
+      type="description"
       name="body"
       placeholder="body"
       />
       <button type="submit">Add post</button>
-
      </form>
+
     </div>
     </section>
   )
 }
 
 PostForm.propTypes = {
-  setPosts: PropTypes.func.isRequired
+  setPosts: PropTypes.func.isRequired,
+  loggedin: PropTypes.bool, // Must be a boolean
+  setLoggedIn: PropTypes.func,
 }
 
 export default PostForm

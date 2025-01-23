@@ -6,7 +6,7 @@ import "../styles/Post.css"
 import PropTypes from "prop-types";
 
 
-export default function Posts({posts, setPosts}) {
+export default function Posts({posts, setPosts, loggedin}) {
 
 
   useEffect(() => {
@@ -27,6 +27,7 @@ export default function Posts({posts, setPosts}) {
         <Post key={post.$id}
         setPosts={setPosts}
         postData={post}
+        loggedin={loggedin}
         />
         //<div key={post.$id}>{post.body}</div>
       ))}
@@ -37,6 +38,7 @@ export default function Posts({posts, setPosts}) {
 }
 
 Posts.propTypes = {
+  loggedin: PropTypes.bool,
   posts: PropTypes.arrayOf(
     PropTypes.shape({
       $id: PropTypes.string.isRequired,
