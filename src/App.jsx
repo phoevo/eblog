@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import PostForm from "./components/PostForm";
 import LoginRegister from "./pages/LoginRegister";
@@ -6,20 +6,23 @@ import { account } from "./appwrite/config";
 import "./App.css";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
+import Intro from "./components/Intro";
 
-export default function App() {
+function AppContent() {
   const [posts, setPosts] = useState([]);
   const [loggedin, setLoggedIn] = useState(false);
+  const location = useLocation();
+
+  const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
 
   useEffect(() => {
-    // Check if the user is already logged in on app load
+
     async function checkUserSession() {
       try {
         const userDetails = await account.get();
         console.log("Logged-in user:", userDetails);
 
-        // Check if the user is admin
-        const isAdmin = userDetails.email === "phoevo@gmail.com"; // Replace with your admin email
+        const isAdmin = userDetails.email === ADMIN_EMAIL;
         setLoggedIn(isAdmin);
       } catch (error) {
         console.log("No active session:", error);
@@ -30,17 +33,34 @@ export default function App() {
     checkUserSession();
   }, []);
 
-  console.log(loggedin)
+  console.log(loggedin);
 
   return (
-    <BrowserRouter>
-    <Navbar loggedin={loggedin} setLoggedIn={setLoggedIn} />
-      <div className="loggedin">{loggedin ? "Logged in as Admin" : "Not logged in"}</div>
+    <>
+      {location.pathname === "/" && <Intro />}
+      <Navbar loggedin={loggedin} setLoggedIn={setLoggedIn} />
+      <div className="loggedin">
+        {loggedin ? "Logged in as Admin" : "Not logged in"}
+      </div>
       <Routes>
-        <Route element={<MainPage posts={posts} setPosts={setPosts} loggedin={loggedin} />} path="/" />
+        <Route
+          element={<MainPage posts={posts} setPosts={setPosts} loggedin={loggedin} />}
+          path="/"
+        />
         <Route element={<PostForm posts={posts} setPosts={setPosts} />} path="/createPost" />
-        <Route element={<LoginRegister loggedin={loggedin} setLoggedIn={setLoggedIn} />} path="/login" />
+        <Route
+          element={<LoginRegister loggedin={loggedin} setLoggedIn={setLoggedIn} />}
+          path="/login"
+        />
       </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

@@ -55,7 +55,7 @@ function PostForm({setPosts}) {
 
 PostForm.propTypes = {
   setPosts: PropTypes.func.isRequired,
-  loggedin: PropTypes.bool, // Must be a boolean
+  loggedin: PropTypes.bool,
   setLoggedIn: PropTypes.func,
 }
 

@@ -1,5 +1,17 @@
 .loggedin{
   display: flex;
   width: 100px;
+}
 
+.intro-section{
+  display: flex;
+  gap: 10px;
+
+}
+
+.pic{
+  border: 2px solid black;
+  height: 150px;
+  width: 150px;
+  border-radius: 100px;
 }
