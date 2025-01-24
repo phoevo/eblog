@@ -7,6 +7,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Intro from "./components/Intro";
+import Fail from "./pages/Fail";
 
 function AppContent() {
   const [posts, setPosts] = useState([]);
@@ -52,6 +53,7 @@ function AppContent() {
           element={<LoginRegister loggedin={loggedin} setLoggedIn={setLoggedIn} />}
           path="/login"
         />
+        <Route element={<Fail/>} path="/fail" />
       </Routes>
     </>
   );
