@@ -2,6 +2,7 @@
 import db from '../appwrite/databases'
 import PropTypes from 'prop-types'
 import "../styles/CreatePost.css"
+import { storage } from '../appwrite/config'
 
 function PostForm({setPosts}) {
 
@@ -9,19 +10,27 @@ function PostForm({setPosts}) {
     e.preventDefault()
     const postTitle = e.target.title.value
     const postBody = e.target.body.value
+    const postImage = e.target.image.files[0];
 
     if(postTitle === "")return
     if(postBody === "") return
 
+    try {
+      let imageId = null;
+      if (postImage) {
+        const bucketId = '6794efa9000b6a0d03e4';
+        const imageResponse = await storage.createFile(
+          bucketId,
+          'unique()',
+          postImage
+        );
+        imageId = imageResponse.$id;
+      }
 
-    try{
-      const payload = {title:postTitle, body:postBody}
+      const payload = {title:postTitle, body:postBody, imageId}
       const response = await db.posts.create(payload)
       setPosts((prevState) => [response, ...prevState])
-
-
       e.target.reset()
-
 
     }catch(error){
       console.error(error)
@@ -35,16 +44,25 @@ function PostForm({setPosts}) {
     <div className="formDiv">
 
       <form className = "postForm" onSubmit={handleAdd}>
-      <input className='titleInput'
-      type="text"
-      name="title"
-      placeholder="title"/>
+      <input
+        className='titleInput'
+        type="text"
+        name="title"
+        placeholder="title"/>
 
-      <textarea className='bodyInput'
-      type="description"
-      name="body"
-      placeholder="body"
+      <textarea
+        className='bodyInput'
+        type="description"
+        name="body"
+        placeholder="body"
       />
+      <input
+        className="fileInput"
+        type="file"
+        name="image"
+        accept="image/*"
+
+        />
       <button type="submit">Add post</button>
      </form>
 

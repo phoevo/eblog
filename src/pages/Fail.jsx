@@ -4,7 +4,6 @@ export default function Fail() {
 
     <section className="fail-section">
 
-
     <div className='fail'>
       Login Failed
     </div>
