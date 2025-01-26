@@ -23,10 +23,13 @@ function Navbar({ loggedin, setLoggedIn }) {
       <div className="navbar-div">
         <button onClick={() => navigate("/")}>Blog</button>
         {loggedin && (<button onClick={() => navigate("/createPost")}>Create Post</button>)}
-        <button>Contact</button>
+
+        <button onClick={() => navigate("/contact")}>Contact</button>
 
         {/* Conditionally render Login or Logout button based on loggedin state */}
         {loggedin && (<button onClick={handleLogout}>Logout</button>)}
+
+
       </div>
     </section>
   );

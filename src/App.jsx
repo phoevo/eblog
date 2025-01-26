@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Intro from "./components/Intro";
 import Fail from "./pages/Fail";
+import Contact from "./pages/Contact";
 
 function AppContent() {
   const [posts, setPosts] = useState([]);
@@ -48,12 +49,17 @@ function AppContent() {
           element={<MainPage posts={posts} setPosts={setPosts} loggedin={loggedin} />}
           path="/"
         />
+
         <Route element={<PostForm posts={posts} setPosts={setPosts} />} path="/createPost" />
+
         <Route
           element={<LoginRegister loggedin={loggedin} setLoggedIn={setLoggedIn} />}
           path="/login"
         />
+
         <Route element={<Fail/>} path="/fail" />
+
+        <Route element={<Contact/>} path= "/contact"/>
       </Routes>
     </>
   );
