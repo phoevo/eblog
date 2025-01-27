@@ -15,10 +15,11 @@ function PostForm({setPosts}) {
     if(postTitle === "")return
     if(postBody === "") return
 
+
     try {
       let imageId = null;
       if (postImage) {
-        const bucketId = import.meta.env.VITE_BUCKET_ID
+        const bucketId = import.meta.env.VITE_BUCKET_ID;
         const imageResponse = await storage.createFile(
           bucketId,
           'unique()',
