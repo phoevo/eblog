@@ -22,7 +22,9 @@
   font-size: medium;
   border: none;
   background-color: whitesmoke;
+  color: black;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .navbar-div button:hover{

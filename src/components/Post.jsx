@@ -8,7 +8,7 @@ function Post({ setPosts, postData, loggedin }) {
 
   const handleDelete = async () => {
     try {
-      // Delete the post document
+
       await databases.deleteDocument(
         import.meta.env.VITE_DATABASE_ID,
         import.meta.env.VITE_COLLECTION_ID_POSTS,
@@ -18,12 +18,12 @@ function Post({ setPosts, postData, loggedin }) {
 
       if (post.imageId) {
         await storage.deleteFile(
-          import.meta.env.VITE_BUCKET_ID, // Bucket ID
-          post.imageId // File ID
+          import.meta.env.VITE_BUCKET_ID,
+          post.imageId
         );
       }
 
-      // Update the posts state after deletion
+
       setPosts((prevState) => prevState.filter((i) => i.$id !== post.$id));
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -31,7 +31,7 @@ function Post({ setPosts, postData, loggedin }) {
   };
 
   const getImageUrl = (imageId) => {
-    const bucketId = import.meta.env.VITE_BUCKET_ID; // Replace with your bucket ID
+    const bucketId = import.meta.env.VITE_BUCKET_ID;
     return storage.getFileView(bucketId, imageId);
   };
 
@@ -66,7 +66,7 @@ Post.propTypes = {
     $id: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    imageId: PropTypes.string, // Optional imageId
+    imageId: PropTypes.string,
   }).isRequired,
 };
 

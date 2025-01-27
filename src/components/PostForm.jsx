@@ -18,7 +18,7 @@ function PostForm({setPosts}) {
     try {
       let imageId = null;
       if (postImage) {
-        const bucketId = '6794efa9000b6a0d03e4';
+        const bucketId = import.meta.env.VITE_BUCKET_ID
         const imageResponse = await storage.createFile(
           bucketId,
           'unique()',
@@ -48,22 +48,28 @@ function PostForm({setPosts}) {
         className='titleInput'
         type="text"
         name="title"
-        placeholder="title"/>
+        placeholder="Title"/>
 
       <textarea
         className='bodyInput'
         type="description"
         name="body"
-        placeholder="body"
+        placeholder="Body"
       />
-      <input
-        className="fileInput"
+
+      <div>
+        <input
+        id="choosefileBtn"
         type="file"
         name="image"
         accept="image/*"
-
         />
-      <button type="submit">Add post</button>
+        <label htmlFor="choosefileBtn" className="fileInput">
+          Choose File
+        </label>
+      </div>
+
+      <button className='addPostBtn' type="submit">Add post</button>
      </form>
 
     </div>

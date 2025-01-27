@@ -9,11 +9,15 @@ import Navbar from "./components/Navbar";
 import Intro from "./components/Intro";
 import Fail from "./pages/Fail";
 import Contact from "./pages/Contact";
+import ReactDOM from "react-dom"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 
 function AppContent() {
   const [posts, setPosts] = useState([]);
   const [loggedin, setLoggedIn] = useState(false);
   const location = useLocation();
+  const editIcon = <FontAwesomeIcon icon={faPenToSquare}/>
 
   const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
 
@@ -59,7 +63,7 @@ function AppContent() {
 
         <Route element={<Fail/>} path="/fail" />
 
-        <Route element={<Contact/>} path= "/contact"/>
+        <Route element={<Contact loggedin={loggedin} setLoggedIn={setLoggedIn} editIcon={editIcon}/>} path= "/contact"/>
       </Routes>
     </>
   );

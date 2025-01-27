@@ -9,6 +9,11 @@ const collections = [
         id: import.meta.env.VITE_COLLECTION_ID_POSTS,
         name: "posts",
     },
+    {
+        dbId: import.meta.env.VITE_DATABASE_ID,
+        id: import.meta.env.VITE_COLLECTION_ID_CONTACT,
+        name: "contact",
+    },
 ];
 
 collections.forEach((col) => {
