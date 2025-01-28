@@ -66,11 +66,11 @@ function PostForm({setPosts}) {
         accept="image/*"
         />
         <label htmlFor="choosefileBtn" className="fileInput">
-          Choose File
+          CHOOSE FILE
         </label>
       </div>
 
-      <button className='addPostBtn' type="submit">Add post</button>
+      <button className='addPostBtn' type="submit">ADD POST</button>
      </form>
 
     </div>

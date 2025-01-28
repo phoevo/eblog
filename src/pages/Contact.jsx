@@ -146,7 +146,7 @@ function Contact({ loggedin, editIcon }) {
             />
           </label>
 
-          <button className="saveBtn" type="submit">Save</button>
+          <button className="saveBtn" type="submit">SAVE</button>
         </form>
       )}
     </section>

@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import MainPage from "./pages/MainPage";
 import PostForm from "./components/PostForm";
 import LoginRegister from "./pages/LoginRegister";
@@ -9,20 +10,19 @@ import Navbar from "./components/Navbar";
 import Intro from "./components/Intro";
 import Fail from "./pages/Fail";
 import Contact from "./pages/Contact";
-import ReactDOM from "react-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import "./styles/Transitions.css"; // Add a CSS file for transitions
 
 function AppContent() {
   const [posts, setPosts] = useState([]);
   const [loggedin, setLoggedIn] = useState(false);
   const location = useLocation();
-  const editIcon = <FontAwesomeIcon icon={faPenToSquare}/>
+  const editIcon = <FontAwesomeIcon icon={faPenToSquare} />;
 
   const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
 
   useEffect(() => {
-
     async function checkUserSession() {
       try {
         const userDetails = await account.get();
@@ -43,28 +43,63 @@ function AppContent() {
 
   return (
     <>
-      {location.pathname === "/" && <Intro />}
+      {location.pathname === "/" && (
+        <Intro loggedin={loggedin} editIcon={editIcon} />
+      )}
+
       <Navbar loggedin={loggedin} setLoggedIn={setLoggedIn} />
+
       <div className="loggedin">
         {loggedin ? "Logged in as Admin" : "Not logged in"}
       </div>
-      <Routes>
-        <Route
-          element={<MainPage posts={posts} setPosts={setPosts} loggedin={loggedin} />}
-          path="/"
-        />
 
-        <Route element={<PostForm posts={posts} setPosts={setPosts} />} path="/createPost" />
+      {/* Add TransitionGroup for smooth transitions */}
+      <TransitionGroup>
+        <CSSTransition
+          key={location.key} // Ensure animation runs on route change
+          classNames="fade"
+          timeout={300} // Duration of animation
+        >
+          <Routes location={location}>
+            <Route
+              element={
+                <MainPage
+                  posts={posts}
+                  setPosts={setPosts}
+                  loggedin={loggedin}
+                  editIcon={editIcon}
+                />
+              }
+              path="/"
+            />
 
-        <Route
-          element={<LoginRegister loggedin={loggedin} setLoggedIn={setLoggedIn} />}
-          path="/login"
-        />
+            <Route
+              element={<PostForm posts={posts} setPosts={setPosts} />}
+              path="/createPost"
+            />
 
-        <Route element={<Fail/>} path="/fail" />
+            <Route
+              element={
+                <LoginRegister loggedin={loggedin} setLoggedIn={setLoggedIn} />
+              }
+              path="/login"
+            />
 
-        <Route element={<Contact loggedin={loggedin} setLoggedIn={setLoggedIn} editIcon={editIcon}/>} path= "/contact"/>
-      </Routes>
+            <Route element={<Fail />} path="/fail" />
+
+            <Route
+              element={
+                <Contact
+                  loggedin={loggedin}
+                  setLoggedIn={setLoggedIn}
+                  editIcon={editIcon}
+                />
+              }
+              path="/contact"
+            />
+          </Routes>
+        </CSSTransition>
+      </TransitionGroup>
     </>
   );
 }

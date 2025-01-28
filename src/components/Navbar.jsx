@@ -1,10 +1,11 @@
 import "../styles/Navbar.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { account } from "../appwrite/config";
 
 function Navbar({ loggedin, setLoggedIn }) {
   const navigate = useNavigate();
+  const location = useLocation(); // Hook to get current URL path
 
   // Logout functionality
   const handleLogout = async () => {
@@ -18,18 +19,37 @@ function Navbar({ loggedin, setLoggedIn }) {
     }
   };
 
+  // Function to check if a route is active
+  const isActive = (path) => location.pathname === path;
+
   return (
     <section className="navbar-section">
       <div className="navbar-div">
-        <button onClick={() => navigate("/")}>Blog</button>
-        {loggedin && (<button onClick={() => navigate("/createPost")}>Create Post</button>)}
-
-        <button onClick={() => navigate("/contact")}>Contact</button>
+        <button
+          onClick={() => navigate("/")}
+          className={isActive("/") ? "active" : ""}
+        >
+          Blog
+        </button>
+        {loggedin && (
+          <button
+            onClick={() => navigate("/createPost")}
+            className={isActive("/createPost") ? "active" : ""}
+          >
+            Create Post
+          </button>
+        )}
+        <button
+          onClick={() => navigate("/contact")}
+          className={isActive("/contact") ? "active" : ""}
+        >
+          Contact
+        </button>
 
         {/* Conditionally render Login or Logout button based on loggedin state */}
-        {loggedin && (<button onClick={handleLogout}>Logout</button>)}
-
-
+        {loggedin && (
+          <button onClick={handleLogout}>Logout</button>
+        )}
       </div>
     </section>
   );
