@@ -1,23 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Contact Section Styling */
 .contact-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
-  width: 500px;
+  min-height: 100vh; /* Full height of the viewport to keep footer at the bottom */
   font-family: 'Inter', sans-serif;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
-
-
-
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Contact Div Styling */
 .contact-div {
-  position: relative; /* Make sure form stays within this container */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,8 +29,30 @@
   border-radius: 10px;
   font-size: 20px;
   padding: 20px;
+  width: 100%;
+  max-width: 500px; /* Optional: limit max width */
 }
 
+/* Contact Form Styling (Positioned to the Right) */
+.contact-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
+  position: fixed; /* Fixed position on the right side */
+  top: 50%; /* Vertically center the form */
+  right: 0; /* Align it to the right edge of the screen */
+  transform: translateY(-50%); /* Offset by half its height to center */
+  padding: 20px;
+  box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
+  background-color: rgb(235, 235, 235);
+  border-radius: 10px;
+  z-index: 1000; /* Ensure the form stays on top */
+}
+
+/* Contact Edit Icon */
 .contactEditIcon {
   background: none;
   border: none;
@@ -37,56 +60,15 @@
   right: 10px;
   cursor: pointer;
   font-size: large;
-
 }
 
-.contactEditIcon:hover{
+.contactEditIcon:hover {
   font-size: larger;
   transition: 200ms;
 }
 
-
-.contact-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-  border-radius: 10px;
-  position: absolute;
-  right: 15px;
-  width: 300px;
-  height: 400px;
-  box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
-  background-color: rgb(235, 235, 235);
-  border-radius: 10px;
-
-}
-
-.contact-message{
-  padding: 10px;
-}
-
-
-.contact-form input {
-  display: flex;
-  align-self: center;
-  width: 200px;
-  height: 30px;
-  margin-top: 0cm;
-  border-radius: 8px;
-  border: none;
-  margin-top: 5px;
-
-}
-
-.contact-form label{
-  font-size: 15px;
-  font-weight: 600;
-}
-
-
-.ContactSaveBtn{
+/* Contact Save Button */
+.ContactSaveBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,12 +84,38 @@
   transition: background 300ms;
 }
 
-.ContactSaveBtn:hover{
+.ContactSaveBtn:hover {
   background-color: black;
 }
 
-.ContactSaveBtn:active{
+.ContactSaveBtn:active {
   transform: translateY(1px);
   box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.3);
   background-color: black;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .contact-section {
+    min-height: auto;  /* Allow content to shrink */
+    padding: 10px;  /* Reduced padding for smaller screens */
+  }
+
+  .contact-div {
+    width: 100%;
+    max-width: 90%; /* Allow contact div to use more width on small screens */
+    margin: 10px 0;
+  }
+
+  .contact-form {
+    width: 90%; /* Adjust width for smaller screens */
+    max-width: 300px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ContactSaveBtn {
+    width: 80%;  /* Button takes up more space on smaller screens */
+  }
 }

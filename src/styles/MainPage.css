@@ -1,9 +1,9 @@
-.mainpage{
+.mainpage {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin: 20px;
-
-
+  flex-grow: 1; /* Allow it to take up the available space */
+  overflow-y: auto; /* Scroll if content overflows */
 }

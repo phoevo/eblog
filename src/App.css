@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* Ensure the entire app takes up full viewport height */
-.app-content {
-  display: flex;
-  flex-direction: column;/* Full height of the viewport */
-
-}
-
-/* Make the main content expand while keeping the footer at the bottom */
-.routeWrapper {
-  flex-grow: 1; /* Pushes the footer down */
-}
 
 /* Default footer styles */
 .footer-section {
