@@ -1,40 +1,46 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 .contact-section {
   display: flex;
-  justify-content: center; /* Ensures the whole section remains centered */
-  align-items: center; /* Vertically aligns the content */
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 500px;
+  width: 500px;
   font-family: 'Inter', sans-serif;
-  position: relative; /* Allows precise positioning if needed */
+  box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+
+
+
 }
 
-
 .contact-div {
+  position: relative; /* Make sure form stays within this container */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  height: 100%;
-  width: 50%;
-  word-wrap:break-word;
-  position: relative;
+  word-wrap: break-word;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
   background-color: whitesmoke;
   border-radius: 10px;
   font-size: 20px;
+  padding: 20px;
 }
 
-.editIcon {
+.contactEditIcon {
   background: none;
   border: none;
   position: absolute;
   right: 10px;
   cursor: pointer;
   font-size: large;
+
 }
 
-.editIcon:hover{
+.contactEditIcon:hover{
   font-size: larger;
   transition: 200ms;
 }
@@ -54,6 +60,7 @@
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
   background-color: rgb(235, 235, 235);
   border-radius: 10px;
+
 }
 
 .contact-message{
@@ -69,7 +76,7 @@
   margin-top: 0cm;
   border-radius: 8px;
   border: none;
-  padding-top: 5px;
+  margin-top: 5px;
 
 }
 
@@ -79,22 +86,28 @@
 }
 
 
-.saveBtn{
+.ContactSaveBtn{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30px;
   width: 100px;
   font-size: 12px;
-  border-radius: 8px;
+  border-radius: 5px;
   border: none;
-  background-color: black;
+  background-color: #444;
   color: white;
   cursor: pointer;
   box-shadow: 0px 2px 5px 1px rgb(0, 0, 0, 0.3);
+  transition: background 300ms;
 }
 
-.saveBtn:active{
+.ContactSaveBtn:hover{
+  background-color: black;
+}
+
+.ContactSaveBtn:active{
   transform: translateY(1px);
   box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.3);
+  background-color: black;
 }

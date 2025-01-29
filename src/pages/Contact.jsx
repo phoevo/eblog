@@ -90,7 +90,7 @@ function Contact({ loggedin, editIcon }) {
     <section className="contact-section">
       <div className="contact-div">
         {loggedin && (
-          <button onClick={handleEdit} className="editIcon">
+          <button onClick={handleEdit} className="contactEditIcon">
             {editIcon}
           </button>
         )}
@@ -146,7 +146,7 @@ function Contact({ loggedin, editIcon }) {
             />
           </label>
 
-          <button className="saveBtn" type="submit">SAVE</button>
+          <button className="ContactSaveBtn" type="submit">SAVE</button>
         </form>
       )}
     </section>

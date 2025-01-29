@@ -42,8 +42,6 @@ function PostForm({setPosts}) {
   return (
     <section className="createPostPage">
 
-    <div className="formDiv">
-
       <form className = "postForm" onSubmit={handleAdd}>
       <input
         className='titleInput'
@@ -65,15 +63,15 @@ function PostForm({setPosts}) {
         name="image"
         accept="image/*"
         />
-        <label htmlFor="choosefileBtn" className="fileInput">
-          CHOOSE FILE
+        <label htmlFor="choosefileBtn" className="PostFileInput">
+          Choose image
         </label>
       </div>
 
-      <button className='addPostBtn' type="submit">ADD POST</button>
+      <button className='addPostBtn' type="submit">Add post</button>
      </form>
 
-    </div>
+
     </section>
   )
 }

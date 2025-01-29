@@ -13,6 +13,7 @@ import Contact from "./pages/Contact";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import "./styles/Transitions.css"; // Add a CSS file for transitions
+import Footer from "./components/Footer";
 
 function AppContent() {
   const [posts, setPosts] = useState([]);
@@ -42,66 +43,37 @@ function AppContent() {
   console.log(loggedin);
 
   return (
-    <>
-      {location.pathname === "/" && (
-        <Intro loggedin={loggedin} editIcon={editIcon} />
-      )}
+    <div className="app-content">
 
-      <Navbar loggedin={loggedin} setLoggedIn={setLoggedIn} />
+<Navbar loggedin={loggedin} setLoggedIn={setLoggedIn} />
+      {location.pathname === "/" && <Intro loggedin={loggedin} editIcon={editIcon} />}
 
-      <div className="loggedin">
-        {loggedin ? "Logged in as Admin" : "Not logged in"}
-      </div>
 
-      {/* Add TransitionGroup for smooth transitions */}
-      <TransitionGroup>
-        <CSSTransition
-          key={location.key} // Ensure animation runs on route change
-          classNames="fade"
-          timeout={300} // Duration of animation
-        >
-          <Routes location={location}>
-            <Route
-              element={
-                <MainPage
-                  posts={posts}
-                  setPosts={setPosts}
-                  loggedin={loggedin}
-                  editIcon={editIcon}
-                />
-              }
-              path="/"
-            />
 
-            <Route
-              element={<PostForm posts={posts} setPosts={setPosts} />}
-              path="/createPost"
-            />
-
-            <Route
-              element={
-                <LoginRegister loggedin={loggedin} setLoggedIn={setLoggedIn} />
-              }
-              path="/login"
-            />
-
-            <Route element={<Fail />} path="/fail" />
-
-            <Route
-              element={
-                <Contact
-                  loggedin={loggedin}
-                  setLoggedIn={setLoggedIn}
-                  editIcon={editIcon}
-                />
-              }
-              path="/contact"
-            />
-          </Routes>
+      <TransitionGroup className="transitionGroup">
+        <CSSTransition key={location.key} classNames="fade" timeout={300}>
+          <div className="routeWrapper">
+            <Routes location={location}>
+              <Route
+                element={<MainPage posts={posts} setPosts={setPosts} loggedin={loggedin} editIcon={editIcon} />}
+                path="/blog"
+              />
+              <Route element={<PostForm posts={posts} setPosts={setPosts} />} path="/createPost" />
+              <Route element={<LoginRegister loggedin={loggedin} setLoggedIn={setLoggedIn} />} path="/login" />
+              <Route element={<Fail />} path="/fail" />
+              <Route element={<Contact loggedin={loggedin} setLoggedIn={setLoggedIn} editIcon={editIcon} />} path="/contact" />
+            </Routes>
+          </div>
         </CSSTransition>
       </TransitionGroup>
-    </>
+
+      <Footer />
+
+
+    </div>
   );
+
+
 }
 
 export default function App() {

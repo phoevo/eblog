@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
-import { databases, storage } from "../appwrite/config"; // Ensure you import the correct Appwrite services
+import { storage } from "../appwrite/config";
 import "../styles/Intro.css";
 import db from "../appwrite/databases";
 
 function Intro({ loggedin, editIcon }) {
   const [edit, setEdit] = useState(false);
+  const [textColor, setTextColor] = useState("black");
 
   const [introinfo, setIntroInfo] = useState({
     introname: "",
     introbody: "",
-    introImage: "", // Store the imageId here
+    introImage: "",
+    introBackgroundImage: "",
+    textColor: "black", // Add textColor to state
   });
 
   const [introId, setIntroId] = useState(null);
@@ -17,15 +20,18 @@ function Intro({ loggedin, editIcon }) {
   useEffect(() => {
     const fetchIntro = async () => {
       try {
-        const response = await db.intro.list(); // Fetch intro data
+        const response = await db.intro.list();
         if (response.documents.length > 0) {
           const existingIntro = response.documents[0];
           setIntroInfo({
             introname: existingIntro.introname,
             introbody: existingIntro.introbody,
-            introImage: existingIntro.introImage || "", // Fetch the introImage field
+            introImage: existingIntro.introImage || "",
+            introBackgroundImage: existingIntro.introBackgroundImage || "",
+            textColor: existingIntro.textColor || "black", // Fetch text color from DB
           });
-          setIntroId(existingIntro.$id); // Save the document ID for updates
+          setTextColor(existingIntro.textColor || "black");
+          setIntroId(existingIntro.$id);
         }
       } catch (error) {
         console.error("Error fetching intro info:", error);
@@ -40,28 +46,34 @@ function Intro({ loggedin, editIcon }) {
     try {
       const introName = e.target.introname.value;
       const introBody = e.target.introbody.value;
-      const introImageFile = e.target.image.files[0];
+      const introImageFile = e.target.introImage.files[0];
+      const introBackgroundImageFile = e.target.introBackgroundImage.files[0];
 
       if (!introName || !introBody) {
         console.error("Name and Message are required.");
         return;
       }
 
-      let introImage = introinfo.introImage; // Keep existing image unless a new one is uploaded
+      let introImage = introinfo.introImage;
+      let introBackgroundImage = introinfo.introBackgroundImage;
+      const bucketId = import.meta.env.VITE_BUCKET_ID;
 
-      // Handle image upload if a new image is provided
       if (introImageFile) {
         try {
-          const bucketId = import.meta.env.VITE_BUCKET_ID; // Bucket ID from environment variables
-          const imageResponse = await storage.createFile(
-            bucketId,
-            "unique()", // Auto-generate a unique file ID
-            introImageFile
-          );
-          introImage = imageResponse.$id; // Update with the new imageId
-          console.log("Uploaded Image ID:", introImage); // Debug log
+          const imageResponse = await storage.createFile(bucketId, "unique()", introImageFile);
+          introImage = imageResponse.$id;
         } catch (uploadError) {
-          console.error("Error uploading image:", uploadError);
+          console.error("Error uploading profile image:", uploadError);
+          return;
+        }
+      }
+
+      if (introBackgroundImageFile) {
+        try {
+          const bgImageResponse = await storage.createFile(bucketId, "unique()", introBackgroundImageFile);
+          introBackgroundImage = bgImageResponse.$id;
+        } catch (uploadError) {
+          console.error("Error uploading background image:", uploadError);
           return;
         }
       }
@@ -69,80 +81,71 @@ function Intro({ loggedin, editIcon }) {
       const payload = {
         introname: introName,
         introbody: introBody,
-        introImage, // Save the new or existing imageId
+        introImage,
+        introBackgroundImage,
+        textColor, // Save text color to DB
       };
 
-      console.log("Payload:", payload); // Debug log
-
       if (introId) {
-        const response = await db.intro.update(introId, payload); // Update the existing intro
-        console.log("Intro updated:", response);
+        await db.intro.update(introId, payload);
       } else {
-        const response = await db.intro.create(payload); // Create a new intro
-        console.log("Intro created:", response);
-        setIntroId(response.$id); // Save the new introId
+        const response = await db.intro.create(payload);
+        setIntroId(response.$id);
       }
 
       setIntroInfo(payload);
-      setEdit(false); // Close edit mode
+      setEdit(false);
     } catch (error) {
       console.error("Error saving intro:", error);
     }
   };
 
-  const handleEdit = () => {
-    setEdit((prevEdit) => !prevEdit);
+  const toggleColor = async () => {
+    const newColor = textColor === "black" ? "white" : "black";
+    setTextColor(newColor);
+
+    if (introId) {
+      try {
+        await db.intro.update(introId, { textColor: newColor }); // Update DB with new color
+      } catch (error) {
+        console.error("Error updating text color:", error);
+      }
+    }
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setIntroInfo((prevInfo) => ({
-      ...prevInfo,
-      [name]: value,
-    }));
-  };
-
-  // Fetch the image URL using the introImage ID
   const getImageUrl = (imageId) => {
-    const bucketId = import.meta.env.VITE_BUCKET_ID;
-    const url = storage.getFileView(bucketId, imageId); // Generate the public URL
-    console.log("Generated URL:", url); // Debug log
-    return url;
+    if (!imageId) return "";
+    return storage.getFileView(import.meta.env.VITE_BUCKET_ID, imageId);
   };
-
-  // Test code: Hardcoded image ID for debugging purposes
-  useEffect(() => {
-    const testImageId = "6798fe7f000219b02bb9"; // Replace with a valid imageId for testing
-    setIntroInfo((prevInfo) => ({
-      ...prevInfo,
-      introImage: testImageId,
-    }));
-    console.log("Testing with hardcoded image ID:", testImageId);
-  }, []);
 
   return (
     <section className="intro-section">
-      <div className="pic">
+      {introinfo.introBackgroundImage && (
+        <div
+          className="intro-background"
+          style={{
+            backgroundImage: `url(${getImageUrl(introinfo.introBackgroundImage)})`,
+          }}
+        />
+      )}
+
+      <div className="introImage">
         {introinfo.introImage ? (
-          <img
-            src={getImageUrl(introinfo.introImage)}
-            alt="Intro"
-            className="introImage"
-          />
+          <img src={getImageUrl(introinfo.introImage)} alt="Intro" className="introImage" />
         ) : (
-          <div className="noImage">No Image</div>
+          <div className="noImage">No Profile Picture</div>
         )}
       </div>
 
       {loggedin && (
-        <button onClick={handleEdit} className="editIcon">
-          {editIcon}
-        </button>
+          <button onClick={() => setEdit(!edit)} className="introEditIcon">
+            {editIcon}
+          </button>
       )}
 
-      <div>
-        <h1>{introinfo.introname}</h1>
-        <div>{introinfo.introbody}</div>
+      <div className="introText">
+        <h1 className="introName" style={{ color: textColor }}>{introinfo.introname}</h1>
+        <div className="introBody" style={{ color: textColor }}>{introinfo.introbody}</div>
       </div>
 
       {edit && (
@@ -151,10 +154,11 @@ function Intro({ loggedin, editIcon }) {
             Name
             <input
               type="text"
-              placeholder="Name"
               name="introname"
               value={introinfo.introname}
-              onChange={handleChange}
+              onChange={(e) =>
+                setIntroInfo({ ...introinfo, introname: e.target.value })
+              }
             />
           </label>
 
@@ -162,27 +166,30 @@ function Intro({ loggedin, editIcon }) {
             Message
             <input
               type="text"
-              placeholder="Message"
               name="introbody"
               value={introinfo.introbody}
-              onChange={handleChange}
+              onChange={(e) =>
+                setIntroInfo({ ...introinfo, introbody: e.target.value })
+              }
             />
           </label>
 
+          <button type="button" className="toggleTextColorBtn" onClick={toggleColor}>
+            Toggle Text Color
+          </button>
+
           <div>
-            <input
-              id="choosefileBtn"
-              type="file"
-              name="image"
-              accept="image/*"
-            />
-            <label htmlFor="choosefileBtn" className="fileInput">
-              CHOOSE FILE
-            </label>
+            <label htmlFor="introImage">Choose Profile Picture</label>
+            <input id="profilePicUpload" type="file" name="introImage" accept="image/*" />
           </div>
 
-          <button className="saveBtn" type="submit">
-            SAVE
+          <div>
+            <label htmlFor="introBackgroundImage">Choose Background Image</label>
+            <input id="backgroundUpload" type="file" name="introBackgroundImage" accept="image/*" />
+          </div>
+
+          <button className="introSaveBtn" type="submit">
+            Save
           </button>
         </form>
       )}

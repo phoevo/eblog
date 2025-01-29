@@ -7,7 +7,7 @@
 
 .fade-enter-active {
   opacity: 1;
-  transition: opacity 200ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 
 .fade-exit {
@@ -16,5 +16,13 @@
 
 .fade-exit-active {
   opacity: 0;
-  transition: opacity 200ms ease-out;
+  transition: opacity 300ms ease-out;
+}
+
+.fade-enter-done{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
 }

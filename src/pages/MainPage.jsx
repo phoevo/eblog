@@ -4,13 +4,18 @@ import "../styles/MainPage.css"
 import PropTypes from "prop-types"
 
 
+
 function MainPage({posts, setPosts, loggedin}) {
 
 
   return (
+
     <section className="mainpage">
       <Posts posts={posts} setPosts={setPosts} loggedin={loggedin}/>
     </section>
+
+
+
   )
 }
 

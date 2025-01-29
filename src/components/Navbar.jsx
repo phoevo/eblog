@@ -25,9 +25,15 @@ function Navbar({ loggedin, setLoggedIn }) {
   return (
     <section className="navbar-section">
       <div className="navbar-div">
-        <button
+      <button
           onClick={() => navigate("/")}
           className={isActive("/") ? "active" : ""}
+        >
+          Main
+        </button>
+        <button
+          onClick={() => navigate("/blog")}
+          className={isActive("/blog") ? "active" : ""}
         >
           Blog
         </button>

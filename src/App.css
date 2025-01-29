@@ -1,5 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+/* Ensure the entire app takes up full viewport height */
+.app-content {
+  display: flex;
+  flex-direction: column;/* Full height of the viewport */
+
+}
+
+/* Make the main content expand while keeping the footer at the bottom */
+.routeWrapper {
+  flex-grow: 1; /* Pushes the footer down */
+}
+
+/* Default footer styles */
+.footer-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-size: 40px;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Special case: Ensure footer is positioned at the bottom when on "/" */
+.footer-home {
+  margin-top: auto; /* Pushes the footer to the bottom */
+}
+
+
+
+.fade-enter-done{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+
+
 .loggedin{
   display: flex;
   width: 100px;
@@ -11,14 +51,6 @@
   gap: 10px;
 
 }
-
-.pic{
-  border: 2px solid black;
-  height: 150px;
-  width: 150px;
-  border-radius: 100px;
-}
-
 
 .fail-section{
   display: flex;
@@ -37,5 +69,4 @@
   height: 50px;
   width: 150px;
   border-radius: 8px;
-
 }
