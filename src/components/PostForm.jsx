@@ -6,38 +6,34 @@ import { storage } from '../appwrite/config'
 
 function PostForm({setPosts}) {
 
-  const handleAdd = async(e) => {
-    e.preventDefault()
-    const postTitle = e.target.title.value
-    const postBody = e.target.body.value
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    const postTitle = e.target.title.value;
+    const postBody = e.target.body.value;
     const postImage = e.target.image.files[0];
 
-    if(postTitle === "")return
-    if(postBody === "") return
-
+    if (!postTitle || !postBody) return; // Prevent empty posts
 
     try {
       let imageId = null;
+
       if (postImage) {
         const bucketId = import.meta.env.VITE_BUCKET_ID;
-        const imageResponse = await storage.createFile(
-          bucketId,
-          'unique()',
-          postImage
-        );
-        imageId = imageResponse.$id;
+        const imageResponse = await storage.createFile(bucketId, 'unique()', postImage);
+        imageId = imageResponse.$id; // Only assign if image is uploaded
       }
 
-      const payload = {title:postTitle, body:postBody, imageId}
-      const response = await db.posts.create(payload)
-      setPosts((prevState) => [response, ...prevState])
-      e.target.reset()
+      // Ensure imageId is explicitly set to `null` when no image is uploaded
+      const payload = { title: postTitle, body: postBody, imageId: imageId };
 
-    }catch(error){
-      console.error(error)
+      const response = await db.posts.create(payload);
+      setPosts((prevState) => [response, ...prevState]);
+      e.target.reset();
+    } catch (error) {
+      console.error("Error creating post:", error);
     }
+  };
 
-  }
 
   return (
     <section className="createPostPage">

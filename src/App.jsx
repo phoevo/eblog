@@ -46,14 +46,14 @@ function AppContent() {
     <div className="app-content">
 
 <Navbar loggedin={loggedin} setLoggedIn={setLoggedIn} />
+
       {location.pathname === "/" && <Intro loggedin={loggedin} editIcon={editIcon} />}
 
-
-
       <TransitionGroup className="transitionGroup">
-        <CSSTransition key={location.key} classNames="fade" timeout={300}>
-          <div className="routeWrapper">
+        <CSSTransition key={location.key} timeout={0}>
             <Routes location={location}>
+
+
               <Route
                 element={<MainPage posts={posts} setPosts={setPosts} loggedin={loggedin} editIcon={editIcon} />}
                 path="/blog"
@@ -63,7 +63,6 @@ function AppContent() {
               <Route element={<Fail />} path="/fail" />
               <Route element={<Contact loggedin={loggedin} setLoggedIn={setLoggedIn} editIcon={editIcon} />} path="/contact" />
             </Routes>
-          </div>
         </CSSTransition>
       </TransitionGroup>
 

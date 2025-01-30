@@ -1,33 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+.fade-enter-done{
+  margin: 0;
+}
 
-/* Default footer styles */
-.footer-section {
+.transitionGroup{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 120px;
-  width: 100%;
-  background-color: black;
-  color: white;
-  font-size: 40px;
-  font-family: 'Raleway', sans-serif;
-}
-
-/* Special case: Ensure footer is positioned at the bottom when on "/" */
-.footer-home {
-  margin-top: auto; /* Pushes the footer to the bottom */
-}
-
-
-
-.fade-enter-done{
-  display: flex;
-  flex-direction: column;
+  margin: 0;
+  height: 100%;
   flex-grow: 1;
 }
-
-
 
 .loggedin{
   display: flex;

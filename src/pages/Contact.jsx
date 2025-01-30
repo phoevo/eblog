@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import "../styles/Contact.css";
 import db from "../appwrite/databases";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faAt } from "@fortawesome/free-solid-svg-icons";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+
+
+
 
 function Contact({ loggedin, editIcon }) {
   const [edit, setEdit] = useState(false);
@@ -11,6 +19,13 @@ function Contact({ loggedin, editIcon }) {
     phone: "",
   });
   const [contactId, setContactId] = useState(null);
+
+  const facebookIcon = <FontAwesomeIcon icon={faSquareFacebook} />;
+  const instagramIcon = <FontAwesomeIcon icon={faInstagram} />;
+  const atIcon = <FontAwesomeIcon icon={faAt} />;
+  const phoneIcon = <FontAwesomeIcon icon={faPhone} />;
+
+
 
 
   useEffect(() => {
@@ -88,6 +103,10 @@ function Contact({ loggedin, editIcon }) {
 
   return (
     <section className="contact-section">
+      <div className="contactH1Container">
+        <h1 className="contactH1">Don't hesitate to contact me anywhere.</h1>
+      </div>
+
       <div className="contact-div">
         {loggedin && (
           <button onClick={handleEdit} className="contactEditIcon">
@@ -96,8 +115,10 @@ function Contact({ loggedin, editIcon }) {
         )}
         <h1 className="contact-message">{contactinfo.message}</h1>
         <p className="contact-name">{contactinfo.name}</p>
-        <p className="contact-email">{contactinfo.email}</p>
-        <p className="contact-phone">{contactinfo.phone}</p>
+        <p className="contact-email">{atIcon} {contactinfo.email}</p>
+        <p className="contact-phone">{phoneIcon} {contactinfo.phone}</p>
+        <p className="facebookIcon">{facebookIcon} Facebook name </p>
+        <p className="instagramIcon">{instagramIcon} Instagram name</p>
       </div>
 
       {edit && (

@@ -1,22 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+.app-content{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 
-/* Contact Section Styling */
+}
+
+.transitionGroup{
+  display: flex;
+  height: 100vh;
+  margin: 0;
+
+}
 .contact-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Full height of the viewport to keep footer at the bottom */
   font-family: 'Inter', sans-serif;
+  background-color: whitesmoke;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
   border-radius: 10px;
   margin: 10px;
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
+  width: 40%;
+  height: 90%;
+
+
 }
 
-/* Contact Div Styling */
+.contactH1Container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 30%;
+  left: 20px;
+}
+
+.contactH1{
+  font-family: 'Raleway', sans-serif;
+  font-size: 60px;
+  font-weight: 500;
+}
+
 .contact-div {
   position: relative;
   display: flex;
@@ -26,33 +52,63 @@
   word-wrap: break-word;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
   background-color: whitesmoke;
+  color: black;
   border-radius: 10px;
   font-size: 20px;
   padding: 20px;
-  width: 100%;
-  max-width: 500px; /* Optional: limit max width */
+  width: 90%;
+  height: 90%;
 }
 
-/* Contact Form Styling (Positioned to the Right) */
+.facebookIcon svg{
+  color: blue;
+  width: 20px;
+  height: 20px;
+}
+
+.instagramIcon svg{
+  color: white;
+  background: linear-gradient(-15deg, #d90028, #f58529, #fbbd0a, #d206e9);
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
 .contact-form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  width: 300px;
-  position: fixed; /* Fixed position on the right side */
-  top: 50%; /* Vertically center the form */
-  right: 0; /* Align it to the right edge of the screen */
-  transform: translateY(-50%); /* Offset by half its height to center */
-  padding: 20px;
-  box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
-  background-color: rgb(235, 235, 235);
   border-radius: 10px;
-  z-index: 1000; /* Ensure the form stays on top */
+  position: absolute;
+  right: 10px;
+  width: 300px;
+  height: 500px;
+  box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.4);
+  background-color: rgba(235, 235, 235, 0.8);
+  border-radius: 10px;
 }
 
-/* Contact Edit Icon */
+.contact-form input {
+  display: flex;
+  align-self: center;
+  width: 250px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+
+.contact-form label{
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+
 .contactEditIcon {
   background: none;
   border: none;
