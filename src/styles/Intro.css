@@ -108,8 +108,21 @@ body{
   box-shadow: 0px 2px 5px 1px rgb(0, 0, 0, 0.3);
 }
 
-.introSaveBtn:hover{
-  background-color:#222;
+.introSaveBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 100px;
+  font-size: 12px;
+  font-family: 'Raleway', sans-serif;
+  border-radius: 5px;
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px 1px rgb(0, 0, 0, 0.3);
+
 }
 
 .introSaveBtn:active{
@@ -173,10 +186,13 @@ body{
   border: none;
   position: absolute;
   right: 10px;
+
 }
 
 .introEditIcon:hover{
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 20px;
   transition: all 200ms;
 }

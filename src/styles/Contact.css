@@ -43,34 +43,64 @@
   font-weight: 500;
 }
 
+.contact-message{
+  font-weight: 400;
+}
+
 .contact-div {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
   word-wrap: break-word;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
   background-color: whitesmoke;
   color: black;
   border-radius: 10px;
   font-size: 20px;
-  padding: 20px;
+  padding: 0px;
   width: 90%;
-  height: 90%;
+  min-height: 90%;
+}
+
+.socialsBox{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 0;
+  flex-grow: 1;
+  width: 100%;
+  background-color: black;
+  color:white;
+  font-weight: 300;
+  border-radius: 0 0 10px 10px;
+}
+
+.socialsBox > h2{
+  font-weight: 400;
+  font-family: 'Raleway';
+}
+
+.socialsLinks{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .facebookIcon svg{
-  color: blue;
-  width: 20px;
-  height: 20px;
+  color: rgb(37, 37, 255);
+  width: 25px;
+  height: 25px;
 }
 
 .instagramIcon svg{
   color: white;
   background: linear-gradient(-15deg, #d90028, #f58529, #fbbd0a, #d206e9);
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 4px;
 }
 
@@ -123,7 +153,7 @@
   transition: 200ms;
 }
 
-/* Contact Save Button */
+
 .ContactSaveBtn{
   display: flex;
   justify-content: center;

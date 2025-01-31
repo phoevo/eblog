@@ -114,11 +114,18 @@ function Contact({ loggedin, editIcon }) {
           </button>
         )}
         <h1 className="contact-message">{contactinfo.message}</h1>
-        <p className="contact-name">{contactinfo.name}</p>
-        <p className="contact-email">{atIcon} {contactinfo.email}</p>
-        <p className="contact-phone">{phoneIcon} {contactinfo.phone}</p>
-        <p className="facebookIcon">{facebookIcon} Facebook name </p>
-        <p className="instagramIcon">{instagramIcon} Instagram name</p>
+        <div className="contact-name">{contactinfo.name}</div>
+        <div className="contact-email">{atIcon} {contactinfo.email}</div>
+        <div className="contact-phone">{phoneIcon} {contactinfo.phone}</div>
+
+        <div className="socialsBox">
+          <h2>Or check out my socials</h2>
+            <div className="socialsLinks">
+              <span className="facebookIcon">{facebookIcon} Facebook name </span>
+              <span className="instagramIcon">{instagramIcon} Instagram name</span>
+            </div>
+        </div>
+
       </div>
 
       {edit && (

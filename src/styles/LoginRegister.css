@@ -7,17 +7,33 @@
   margin-top: 10px;
 }
 
-.login-page > button{
-  width: 180px;
-  height: 30px;
+.login-page > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: auto;
+  height: 50px;
   box-shadow: 0px 1px 3px 0px grey;
   background-color: white;
-  border: none;
-  color: grey;
-  font-size: large;
   border-radius: 8px;
+  cursor: pointer;
+  font-size: large;
+  color: #444;
+
+  border: 2px solid transparent;
+  animation: googleBorder 10s infinite linear;
 }
 
-.login-page > button:hover{
-  background-color: rgb(255, 255, 255, 0.2);
+@keyframes googleBorder {
+  0% { border-color: #4285F4; }  /* Google Blue */
+  25% { border-color: #DB4437; } /* Google Red */
+  50% { border-color: #F4B400; } /* Google Yellow */
+  75% { border-color: #0F9D58; } /* Google Green */
+  100% { border-color: #4285F4; } /* Back to Blue */
+}
+
+
+.googleIcon{
+  font-size: larger;
 }
