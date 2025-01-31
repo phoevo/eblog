@@ -4,10 +4,15 @@ body{
 
 }
 
+.transitionGroup{
+  display: block;
+  margin: 0;
+}
+
 .intro-section {
   display: flex;
-  flex-direction: column; /* Ensures content is stacked vertically */
-  height: 500px;
+  flex-direction: column;
+  min-height: 100vh;
   position: relative;
   padding: 10px;
   font-family: 'Raleway', sans-serif;
@@ -21,7 +26,6 @@ body{
 }
 
 .introText{
-
   width: 30%;
   height: 300px;
   overflow-y: auto;

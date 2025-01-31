@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { storage } from "../appwrite/config";
 import "../styles/Intro.css";
 import db from "../appwrite/databases";
+import PropTypes from "prop-types";
 
 function Intro({ loggedin, editIcon }) {
   const [edit, setEdit] = useState(false);
@@ -196,5 +197,11 @@ function Intro({ loggedin, editIcon }) {
     </section>
   );
 }
+
+
+  Intro.propTypes = {
+    loggedin: PropTypes.bool,
+    editIcon: PropTypes.element
+  }
 
 export default Intro;
