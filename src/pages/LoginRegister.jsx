@@ -22,7 +22,7 @@ function LoginRegister({ setLoggedIn }) {
       const userDetails = await account.get();
       console.log("User details:", userDetails);
 
-      const isAdmin = userDetails.email === ADMIN_EMAIL; //OR E'S EMAL
+      const isAdmin = userDetails.email === ADMIN_EMAIL; //OR E'S EMAIL
       setLoggedIn(isAdmin);
     } catch (error) {
       console.error("Error during login:", error);
