@@ -33,7 +33,7 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  width: 30%;
+  width: 25%;
   left: 20px;
 }
 
@@ -88,10 +88,12 @@
   display: flex;
   width: 100%;
   justify-content: space-evenly;
+  align-items: center;
+
 }
 
 .facebookIcon svg{
-  color: rgb(37, 37, 255);
+  color: rgb(66 103 178);
   width: 25px;
   height: 25px;
 }
@@ -102,6 +104,20 @@
   width: 25px;
   height: 25px;
   border-radius: 4px;
+}
+
+
+.socialsLinks > p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.linkedInIcon svg{
+  color: #0072b1;
+  width: 25px;
+  height: 25px;
 }
 
 .contact-form {

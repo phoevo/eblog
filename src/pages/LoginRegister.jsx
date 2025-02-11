@@ -11,7 +11,11 @@ function LoginRegister({ setLoggedIn }) {
 
   const REDIRECT_URL = import.meta.env.VITE_APPWRITE_REDIRECT_URL || "http://localhost:5173/";
   const FAILURE_URL = import.meta.env.VITE_APPWRITE_FAILURE_URL || "http://localhost:5173/fail";
-  const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "phoevo@gmail.com"
+  const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL
+  const DEV_EMAIL = import.meta.env.VITE_DEV_EMAIL
+
+  const ADMIN_EMAILS = [ADMIN_EMAIL, DEV_EMAIL];
+
 
   async function handleLogin() {
     try {
@@ -22,13 +26,15 @@ function LoginRegister({ setLoggedIn }) {
       const userDetails = await account.get();
       console.log("User details:", userDetails);
 
-      const isAdmin = userDetails.email === ADMIN_EMAIL; //OR E'S EMAIL
+      const isAdmin = ADMIN_EMAILS.includes(userDetails.email);
       setLoggedIn(isAdmin);
     } catch (error) {
       console.error("Error during login:", error);
       alert("Login failed. Please check your connection or try again.");
     }
   }
+
+
 
   return (
     <section className="login-section">

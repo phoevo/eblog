@@ -21,7 +21,10 @@ function AppContent() {
   const location = useLocation();
   const editIcon = <FontAwesomeIcon icon={faPenToSquare} />;
 
-  const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
+  const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL
+  const DEV_EMAIL = import.meta.env.VITE_DEV_EMAIL
+
+  const ADMIN_EMAILS = [ADMIN_EMAIL, DEV_EMAIL];
 
   useEffect(() => {
     async function checkUserSession() {
@@ -29,17 +32,15 @@ function AppContent() {
         const userDetails = await account.get();
         console.log("Logged-in user:", userDetails);
 
-        const isAdmin = userDetails.email === ADMIN_EMAIL;
+        const isAdmin = ADMIN_EMAILS.includes(userDetails.email);
         setLoggedIn(isAdmin);
       } catch (error) {
         console.log("No active session:", error);
         setLoggedIn(false);
       }
     }
-
     checkUserSession();
   }, []);
-
   console.log(loggedin);
 
   return (
@@ -53,7 +54,6 @@ function AppContent() {
         <CSSTransition key={location.key} timeout={0}>
             <Routes location={location}>
 
-
               <Route
                 element={<MainPage posts={posts} setPosts={setPosts} loggedin={loggedin} editIcon={editIcon} />}
                 path="/blog"
@@ -63,6 +63,7 @@ function AppContent() {
               <Route element={<Fail />} path="/fail" />
               <Route element={<Contact loggedin={loggedin} setLoggedIn={setLoggedIn} editIcon={editIcon} />} path="/contact" />
             </Routes>
+
         </CSSTransition>
       </TransitionGroup>
 
@@ -71,10 +72,7 @@ function AppContent() {
 
     </div>
   );
-
-
 }
-
 export default function App() {
   return (
     <BrowserRouter>

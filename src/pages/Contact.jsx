@@ -4,6 +4,7 @@ import db from "../appwrite/databases";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import {faLinkedin} from "@fortawesome/free-brands-svg-icons";
 import { faAt } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
@@ -21,7 +22,8 @@ function Contact({ loggedin, editIcon }) {
   const [contactId, setContactId] = useState(null);
 
   const facebookIcon = <FontAwesomeIcon icon={faSquareFacebook} />;
-  const instagramIcon = <FontAwesomeIcon icon={faInstagram} />;
+  // const instagramIcon = <FontAwesomeIcon icon={faInstagram} />;
+  const linkedInIcon = <FontAwesomeIcon icon={faLinkedin} size="xl"/>
   const atIcon = <FontAwesomeIcon icon={faAt} />;
   const phoneIcon = <FontAwesomeIcon icon={faPhone} />;
 
@@ -121,8 +123,9 @@ function Contact({ loggedin, editIcon }) {
         <div className="socialsBox">
           <h2>Or check out my socials</h2>
             <div className="socialsLinks">
-              <span className="facebookIcon">{facebookIcon} Facebook name </span>
-              <span className="instagramIcon">{instagramIcon} Instagram name</span>
+              <p className="facebookIcon">{facebookIcon} Facebook name </p>
+              {/* <span className="instagramIcon">{instagramIcon} Instagram name</span> */}
+              <p className="linkedInIcon">{linkedInIcon} LinkedIn name</p>
             </div>
         </div>
 

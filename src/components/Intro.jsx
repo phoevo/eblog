@@ -13,7 +13,7 @@ function Intro({ loggedin, editIcon }) {
     introbody: "",
     introImage: "",
     introBackgroundImage: "",
-    textColor: "black", // Add textColor to state
+    textColor: "black",
   });
 
   const [introId, setIntroId] = useState(null);
@@ -29,7 +29,7 @@ function Intro({ loggedin, editIcon }) {
             introbody: existingIntro.introbody,
             introImage: existingIntro.introImage || "",
             introBackgroundImage: existingIntro.introBackgroundImage || "",
-            textColor: existingIntro.textColor || "black", // Fetch text color from DB
+            textColor: existingIntro.textColor || "black",
           });
           setTextColor(existingIntro.textColor || "black");
           setIntroId(existingIntro.$id);
@@ -84,7 +84,7 @@ function Intro({ loggedin, editIcon }) {
         introbody: introBody,
         introImage,
         introBackgroundImage,
-        textColor, // Save text color to DB
+        textColor,
       };
 
       if (introId) {
@@ -107,7 +107,7 @@ function Intro({ loggedin, editIcon }) {
 
     if (introId) {
       try {
-        await db.intro.update(introId, { textColor: newColor }); // Update DB with new color
+        await db.intro.update(introId, { textColor: newColor });
       } catch (error) {
         console.error("Error updating text color:", error);
       }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { databases, storage } from '../appwrite/config'; // Corrected import
+import { databases, storage } from '../appwrite/config';
 import PropTypes from 'prop-types';
 import "../styles/Post.css";
 
@@ -8,14 +8,12 @@ function Post({ setPosts, postData, loggedin }) {
 
   const handleDelete = async () => {
     try {
-      // Delete post from database
       await databases.deleteDocument(
         import.meta.env.VITE_DATABASE_ID,
         import.meta.env.VITE_COLLECTION_ID_POSTS,
         post.$id
       );
 
-      // Only delete the image if imageId is valid and not empty
       if (post.imageId && post.imageId !== "image" && post.imageId.trim() !== "") {
         await storage.deleteFile(import.meta.env.VITE_BUCKET_ID, post.imageId);
       }
@@ -26,25 +24,24 @@ function Post({ setPosts, postData, loggedin }) {
     }
   };
 
-
   const getImageUrl = (imageId) => {
     const bucketId = import.meta.env.VITE_BUCKET_ID;
     return storage.getFileView(bucketId, imageId);
   };
 
   return (
-    <section className="post-section">
+    <section className="post-section" style={{ backgroundColor: "#f5f5f5" }}>
+
       <h1 className="postTitle">{post.title}</h1>
       <div className="postBody">{post.body}</div>
 
       {post.imageId && getImageUrl(post.imageId) && (
-      <img
-        src={getImageUrl(post.imageId)}
-        className="postImage"
-        onError={(e) => e.target.style.display = 'none'} // Hide image if loading fails
-      />
-)}
-
+        <img
+          src={getImageUrl(post.imageId)}
+          className="postImage"
+          onError={(e) => (e.target.style.display = 'none')}
+        />
+      )}
 
       {loggedin && (
         <button className="postDelete" onClick={handleDelete}>
@@ -58,7 +55,6 @@ function Post({ setPosts, postData, loggedin }) {
 Post.propTypes = {
   loggedin: PropTypes.bool,
   setPosts: PropTypes.func.isRequired,
-  setPost: PropTypes.func,
   postData: PropTypes.shape({
     $id: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
