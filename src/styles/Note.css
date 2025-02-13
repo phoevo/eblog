@@ -1,0 +1,109 @@
+
+.note-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 250px;
+  height: 150px;
+  border-radius: 20px;
+  color: black;
+  background: rgba(235, 215, 255, 0.9);
+  overflow: hidden;
+  z-index: 5;
+
+}
+
+.note-section:before {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  border-style: solid;
+  border-color: whitesmoke whitesmoke black whitesmoke;
+  background: whitesmoke;
+
+
+  width: 0;
+}
+
+
+
+/* Optional: Add a subtle hover effect to emphasize the fold */
+.note-section:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly increase shadow on hover */
+}
+
+
+
+.note-section:active{
+  cursor: grabbing;
+}
+
+
+.createNoteDropDown{
+  display: flex;
+  position: absolute;
+  top: 50px;
+  right: 80px;
+  box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.4);
+  background-color: rgba(235, 235, 235, 0.8);
+}
+
+
+.noteForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+}
+
+.noteTitleInput{
+  display: flex;
+  width: 100px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.noteBodyInput{
+  display: flex;
+  justify-content: flex-start;
+  width: 100px;
+  height: 60px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  font-family: 'Montserrat', sans-serif;
+  word-break:break-all;
+}
+
+
+
+.noteTitle{
+  font-size: 30px;
+}
+
+.addNoteBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 90px;
+  margin-top: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.noteDelete{
+
+}

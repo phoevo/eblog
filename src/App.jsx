@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 
 function AppContent() {
   const [posts, setPosts] = useState([]);
+  const [notes, setNotes] = useState([]);
   const [loggedin, setLoggedIn] = useState(false);
   const location = useLocation();
   const editIcon = <FontAwesomeIcon icon={faPenToSquare} />;
@@ -55,7 +56,10 @@ function AppContent() {
             <Routes location={location}>
 
               <Route
-                element={<MainPage posts={posts} setPosts={setPosts} loggedin={loggedin} editIcon={editIcon} />}
+                element={<MainPage
+                  posts={posts} setPosts={setPosts}
+                  notes={notes} setNotes={setNotes}
+                  loggedin={loggedin} editIcon={editIcon} />}
                 path="/blog"
               />
               <Route element={<PostForm posts={posts} setPosts={setPosts} />} path="/createPost" />

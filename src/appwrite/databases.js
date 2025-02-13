@@ -24,6 +24,11 @@ const collections = [
         id: import.meta.env.VITE_COLLECTION_ID_BLOG,
         name: "blog",
     },
+    {
+        dbId: import.meta.env.VITE_DATABASE_ID,
+        id: import.meta.env.VITE_COLLECTION_ID_NOTES,
+        name: "notes",
+    },
 ];
 
 collections.forEach((col) => {

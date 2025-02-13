@@ -20,10 +20,9 @@ function PostForm({setPosts}) {
       if (postImage) {
         const bucketId = import.meta.env.VITE_BUCKET_ID;
         const imageResponse = await storage.createFile(bucketId, 'unique()', postImage);
-        imageId = imageResponse.$id; // Only assign if image is uploaded
+        imageId = imageResponse.$id;
       }
 
-      // Ensure imageId is explicitly set to `null` when no image is uploaded
       const payload = { title: postTitle, body: postBody, imageId: imageId };
 
       const response = await db.posts.create(payload);
