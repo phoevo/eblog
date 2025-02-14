@@ -3,6 +3,9 @@ import { databases } from "../appwrite/config";
 import PropTypes from "prop-types";
 import "../styles/Note.css";
 import Draggable from "react-draggable";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
+
 
 function Note({ setNotes, noteData, loggedin }) {
   if (!noteData) {
@@ -12,6 +15,9 @@ function Note({ setNotes, noteData, loggedin }) {
   const [note] = useState(noteData);
 
   const localStorageKey = `note-${note.$id}-position`;
+
+  const deleteIcon = <FontAwesomeIcon icon={faTrash} />
+
 
 
   const [position, setPosition] = useState(() => {
@@ -52,7 +58,7 @@ function Note({ setNotes, noteData, loggedin }) {
 
         {loggedin && (
           <button className="noteDelete" onClick={handleDelete}>
-            Delete
+            {deleteIcon}
           </button>
         )}
       </section>
@@ -67,6 +73,7 @@ Note.propTypes = {
     $id: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    editIcon: PropTypes.element
   }),
 };
 

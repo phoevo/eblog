@@ -21,7 +21,7 @@ export default function Notes({ notes, setNotes, loggedin, style }) {
     };
 
     fetchNotes();
-  }, [setNotes]); // ✅ Run only when `setNotes` changes
+  }, [setNotes]);
 
 
   return (
@@ -38,4 +38,5 @@ Notes.propTypes = {
   notes: PropTypes.array.isRequired,
   setNotes: PropTypes.func.isRequired,
   style: PropTypes.object,
+
 };

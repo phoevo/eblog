@@ -36,7 +36,7 @@ function NoteForm({setNotes, setNoteView}) {
         name="title"
         placeholder="Title"/>
 
-      <input
+      <textarea maxLength={120}
         className='noteBodyInput'
         type="description"
         name="body"
