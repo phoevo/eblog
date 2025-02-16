@@ -1,22 +1,21 @@
 .posts-div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   width: 50vw;
-  height: 95vh;
-  background-color: whitesmoke;
-  margin: 10px;
+  height: 90vh;
+  margin-top: 10px;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
   border-radius: 10px;
-  overflow-y: auto;
-  max-height: 100vh;
+  overflow-y: scroll;
   padding: 10px;
+  gap: 70px;
 }
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -25,8 +24,8 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: orangered;
-  border-radius: 3px;
+  background: black;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -38,18 +37,15 @@
   align-items: flex-start;
   border: 1px solid black;
   flex-direction: column;
-  margin: 20px;
   width: 80%;
-  min-height: 200px; /* Minimum height, but it will grow */
+  height: 100%;
   word-wrap: break-word;
   box-shadow: 6px 6px 0px 0px rgb(0, 0, 0, 1);
   background-color: rgb(245, 245, 245);
   border-radius: 10px;
   font-family: 'Montserrat', sans-serif;
-  position: relative; /* Make the post-section the reference point for absolute positioning */
-  padding: 10px;
-  box-sizing: border-box;
-  flex-shrink: 0;
+  position: relative;
+
 }
 
 
@@ -62,21 +58,25 @@
 
 .postBody {
   display: flex;
+  margin-bottom: 10px;
   padding: 20px;
   align-self: center;
 
 }
 
 .postImage {
-  display: block; /* Changed from flex to block to behave like an image */
+  display: block; /* Ensures normal image behavior */
   align-self: center;
-  width: 100%; /* Make the image responsive */
-  max-width: 100%; /* Ensure it doesn't exceed the container's width */
-  height: auto;
+  max-width: 100%; /* Prevents overflow */
+  width: 100%; /* Ensures it scales properly */
+  height: auto; /* Keeps aspect ratio */
   border-radius: 10px;
   padding: 5px;
-  box-sizing: border-box; /* Include padding in the width calculation */
+  box-sizing: border-box;
+  object-fit: contain; /* Ensures it fits inside */
+
 }
+
 
 .postDelete {
   display: flex;
@@ -87,8 +87,7 @@
   right: 10px;
   height: 20px;
   width: 60px;
-  margin-bottom: 2px;
-  margin-right: 2px;
+
   background-color: black;
   color: white;
   border: none;
