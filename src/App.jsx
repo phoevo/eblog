@@ -12,7 +12,7 @@ import Fail from "./pages/Fail";
 import Contact from "./pages/Contact";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import "./styles/Transitions.css"; // Add a CSS file for transitions
+import "./styles/Transitions.css";
 import Footer from "./components/Footer";
 
 function AppContent() {

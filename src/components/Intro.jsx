@@ -3,6 +3,7 @@ import { storage } from "../appwrite/config";
 import "../styles/Intro.css";
 import db from "../appwrite/databases";
 import PropTypes from "prop-types";
+import useClickOutside from "../hooks/useClickOutside";
 
 function Intro({ loggedin, editIcon }) {
   const [edit, setEdit] = useState(false);
@@ -17,6 +18,9 @@ function Intro({ loggedin, editIcon }) {
   });
 
   const [introId, setIntroId] = useState(null);
+  const editRef = useClickOutside(() => setEdit(false));
+
+
 
   useEffect(() => {
     const fetchIntro = async () => {
@@ -139,9 +143,9 @@ function Intro({ loggedin, editIcon }) {
       </div>
 
       {loggedin && (
-          <button onClick={() => setEdit(!edit)} className="introEditIcon">
-            {editIcon}
-          </button>
+        <button onClick={() => setEdit(!edit)} className="introEditIcon">
+          {editIcon}
+        </button>
       )}
 
       <div className="introText">
@@ -150,7 +154,7 @@ function Intro({ loggedin, editIcon }) {
       </div>
 
       {edit && (
-        <form onSubmit={handleAdd} className="intro-form">
+        <form onSubmit={handleAdd} className="intro-form" ref={editRef}>
           <label>
             Name
             <input
@@ -198,10 +202,9 @@ function Intro({ loggedin, editIcon }) {
   );
 }
 
-
-  Intro.propTypes = {
-    loggedin: PropTypes.bool,
-    editIcon: PropTypes.element
-  }
+Intro.propTypes = {
+  loggedin: PropTypes.bool,
+  editIcon: PropTypes.element
+};
 
 export default Intro;

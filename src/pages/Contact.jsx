@@ -7,6 +7,7 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import {faLinkedin} from "@fortawesome/free-brands-svg-icons";
 import { faAt } from "@fortawesome/free-solid-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import useClickOutside from "../hooks/useClickOutside";
 
 
 
@@ -26,6 +27,8 @@ function Contact({ loggedin, editIcon }) {
   const linkedInIcon = <FontAwesomeIcon icon={faLinkedin} size="xl"/>
   const atIcon = <FontAwesomeIcon icon={faAt} />;
   const phoneIcon = <FontAwesomeIcon icon={faPhone} />;
+
+  const editRef = useClickOutside(() => setEdit(false));
 
 
 
@@ -132,7 +135,7 @@ function Contact({ loggedin, editIcon }) {
       </div>
 
       {edit && (
-        <form onSubmit={handleAdd} className="contact-form">
+        <form onSubmit={handleAdd} className="contact-form" ref ={editRef}>
           <label>
             Message
             <input
