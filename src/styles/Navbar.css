@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 .navbar-section{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   background-color: black;
   box-shadow: 0 5px 6px -6px black;
@@ -17,11 +17,12 @@
 .navbar-div{
   display: flex;
   gap: 10px;
+
 }
 
 .navbar-div button {
   padding: 10px 20px;
-  margin: 0 5px;
+  margin: 0px 5px;
   background-color: transparent;
   border: none;
   color: white;

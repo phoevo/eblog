@@ -5,21 +5,20 @@ import { account } from "../appwrite/config";
 
 function Navbar({ loggedin, setLoggedIn }) {
   const navigate = useNavigate();
-  const location = useLocation(); // Hook to get current URL path
+  const location = useLocation();
 
   // Logout functionality
   const handleLogout = async () => {
     try {
-      await account.deleteSession("current"); // Delete the current session
-      setLoggedIn(false); // Set logged in state to false
-      navigate("/"); // Redirect to home page after logout
+      await account.deleteSession("current");
+      setLoggedIn(false);
+      navigate("/");
     } catch (error) {
       console.error("Logout failed:", error);
       alert("Logout failed. Please try again.");
     }
   };
 
-  // Function to check if a route is active
   const isActive = (path) => location.pathname === path;
 
   return (

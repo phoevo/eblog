@@ -1,16 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../styles/Contact.css";
 import db from "../appwrite/databases";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import {faLinkedin} from "@fortawesome/free-brands-svg-icons";
-import { faAt } from "@fortawesome/free-solid-svg-icons";
+// import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import useClickOutside from "../hooks/useClickOutside";
-
-
-
+import emailjs from "@emailjs/browser";
 
 function Contact({ loggedin, editIcon }) {
   const [edit, setEdit] = useState(false);
@@ -21,17 +16,11 @@ function Contact({ loggedin, editIcon }) {
     phone: "",
   });
   const [contactId, setContactId] = useState(null);
+  const emailForm = useRef(null);
 
-  const facebookIcon = <FontAwesomeIcon icon={faSquareFacebook} />;
-  // const instagramIcon = <FontAwesomeIcon icon={faInstagram} />;
-  const linkedInIcon = <FontAwesomeIcon icon={faLinkedin} size="xl"/>
-  const atIcon = <FontAwesomeIcon icon={faAt} />;
+  // const linkedInIcon = <FontAwesomeIcon icon={faLinkedin} size="xl" />;
   const phoneIcon = <FontAwesomeIcon icon={faPhone} />;
-
   const editRef = useClickOutside(() => setEdit(false));
-
-
-
 
   useEffect(() => {
     const fetchContact = async () => {
@@ -46,7 +35,6 @@ function Contact({ loggedin, editIcon }) {
             phone: existingContact.phone,
           });
           setContactId(existingContact.$id);
-
         }
       } catch (error) {
         console.error("Error fetching contact info:", error);
@@ -76,11 +64,9 @@ function Contact({ loggedin, editIcon }) {
       };
 
       if (contactId) {
-
-        const response = await db.contact.update(contactId, payload);
-        console.log("Contact updated:", response);
+        await db.contact.update(contactId, payload);
+        console.log("Contact updated:", payload);
       } else {
-
         const response = await db.contact.create(payload);
         console.log("Contact created:", response);
         setContactId(response.$id);
@@ -92,6 +78,28 @@ function Contact({ loggedin, editIcon }) {
     } catch (error) {
       console.error("Error saving contact:", error);
     }
+  };
+
+  const handleSendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_l44cx0l", // Replace with your EmailJS service ID
+        "template_2a9fr0u", // Replace with your EmailJS template ID
+        emailForm.current,
+        "hR4COSO4qV4GDCZwK" // Replace with your EmailJS public key
+      )
+      .then(
+        (response) => {
+          console.log("Email sent successfully:", response);
+          alert("Your message has been sent!");
+          emailForm.current.reset();
+        },
+        (error) => {
+          console.error("Error sending email:", error);
+        }
+      );
   };
 
   const handleEdit = () => {
@@ -109,7 +117,7 @@ function Contact({ loggedin, editIcon }) {
   return (
     <section className="contact-section">
       <div className="contactH1Container">
-        <h1 className="contactH1">Don't hesitate to contact me anywhere.</h1>
+
       </div>
 
       <div className="contact-div">
@@ -123,19 +131,16 @@ function Contact({ loggedin, editIcon }) {
         <div className="contact-email">{contactinfo.email}</div>
         <div className="contact-phone">{phoneIcon} {contactinfo.phone}</div>
 
-        <div className="socialsBox">
+        {/* <div className="socialsBox">
           <h2>Or check out my socials</h2>
-            <div className="socialsLinks">
-              {/* <p className="facebookIcon">{facebookIcon} Facebook name </p> */}
-              {/* <span className="instagramIcon">{instagramIcon} Instagram name</span> */}
-              <p className="linkedInIcon">{linkedInIcon} Efthymia Karatopouzi</p>
-            </div>
-        </div>
-
+          <div className="socialsLinks">
+            <p className="linkedInIcon">{linkedInIcon} Efthymia Karatopouzi</p>
+          </div>
+        </div> */}
       </div>
 
       {edit && (
-        <form onSubmit={handleAdd} className="contact-form" ref ={editRef}>
+        <form onSubmit={handleAdd} className="contact-form" ref={editRef}>
           <label>
             Message
             <input
@@ -171,7 +176,7 @@ function Contact({ loggedin, editIcon }) {
 
           <label>
             Number
-            <input
+            <input className="contactNumber"
               type="number"
               placeholder="phone"
               name="phone"
@@ -180,9 +185,35 @@ function Contact({ loggedin, editIcon }) {
             />
           </label>
 
-          <button className="ContactSaveBtn" type="submit">Save</button>
+          <button className="ContactSaveBtn" type="submit">
+            Save
+          </button>
         </form>
       )}
+
+
+      <div className="messageSection">
+      <p className="contactH1">Send me a message</p>
+
+      <form ref={emailForm} onSubmit={handleSendEmail} className="emailForm">
+        <label>
+          Name:
+          <input type="text" name="user_name" required />
+        </label>
+
+        <label>
+          Your Email:
+          <input type="email" name="user_email" required />
+        </label>
+
+        <label>
+          Message:
+          <textarea name="message" required></textarea>
+        </label>
+
+        <button type="submit">Send message</button>
+      </form>
+      </div>
     </section>
   );
 }

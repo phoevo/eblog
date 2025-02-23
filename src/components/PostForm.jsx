@@ -1,10 +1,11 @@
-//import React from 'react'
-import db from '../appwrite/databases'
-import PropTypes from 'prop-types'
-import "../styles/CreatePost.css"
-import { storage } from '../appwrite/config'
+import db from '../appwrite/databases';
+import PropTypes from 'prop-types';
+import "../styles/CreatePost.css";
+import { storage } from '../appwrite/config';
+import useFileUpload from '../hooks/useFileUpload';
 
-function PostForm({setPosts}) {
+function PostForm({ setPosts }) {
+  const [fileName, handleFileChange] = useFileUpload(); // Use the custom hook
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -33,48 +34,39 @@ function PostForm({setPosts}) {
     }
   };
 
-
   return (
     <section className="createPostPage">
+      <form className="postForm" onSubmit={handleAdd}>
+        <input className='titleInput' type="text" name="title" placeholder="Title" />
 
-      <form className = "postForm" onSubmit={handleAdd}>
-      <input
-        className='titleInput'
-        type="text"
-        name="title"
-        placeholder="Title"/>
+        <textarea className='bodyInput' type="description" name="body" placeholder="Body" />
 
-      <textarea
-        className='bodyInput'
-        type="description"
-        name="body"
-        placeholder="Body"
-      />
+        <div className="file-upload-container">
+          <input
+            id="choosefileBtn"
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+          <label htmlFor="choosefileBtn" className="PostFileInput">
+            Choose File
+          </label>
+          <span className="file-name">{fileName}</span>
+          <button className='addPostBtn' type="submit">Add post</button>
 
-      <div>
-        <input
-        id="choosefileBtn"
-        type="file"
-        name="image"
-        accept="image/*"
-        />
-        <label htmlFor="choosefileBtn" className="PostFileInput">
-          Choose image
-        </label>
-      </div>
-
-      <button className='addPostBtn' type="submit">Add post</button>
-     </form>
+        </div>
 
 
+      </form>
     </section>
-  )
+  );
 }
 
 PostForm.propTypes = {
   setPosts: PropTypes.func.isRequired,
   loggedin: PropTypes.bool,
   setLoggedIn: PropTypes.func,
-}
+};
 
-export default PostForm
+export default PostForm;
