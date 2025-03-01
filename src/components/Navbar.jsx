@@ -7,7 +7,6 @@ function Navbar({ loggedin, setLoggedIn }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Logout functionality
   const handleLogout = async () => {
     try {
       await account.deleteSession("current");

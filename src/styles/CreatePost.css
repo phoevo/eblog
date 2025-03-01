@@ -85,7 +85,10 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+
+  justify-self: center;
 }
+
 
 .file-input {
   display: none; /* Hide default input */
@@ -94,4 +97,21 @@
 .file-name {
   font-size: 14px;
   color: #333;
+}
+
+.disabled-btn{
+  background-color: rgb(195, 195, 195);
+  color: black;
+  width: 130px;
+  font-size: 14px;
+}
+
+.success-btn{
+  background-color: rgb(1, 173, 1);
+  color: white;
+}
+
+.error-btn{
+  background-color: rgb(210, 0, 0);
+
 }

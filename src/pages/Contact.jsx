@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "../styles/Contact.css";
 import db from "../appwrite/databases";
+import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
@@ -217,5 +218,10 @@ function Contact({ loggedin, editIcon }) {
     </section>
   );
 }
+
+Contact.propTypes = {
+  loggedin: PropTypes.bool.isRequired,
+  editIcon: PropTypes.bool.isRequired,
+};
 
 export default Contact;
