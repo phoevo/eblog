@@ -19,7 +19,8 @@ function Note({ setNotes, noteData, loggedin }) {
   const editIcon = <FontAwesomeIcon icon={faPenToSquare} />;
 
   const [edit, setEdit] = useState(false);
-  const [position, setPosition] = useState(() => {
+
+    const [position, setPosition] = useState(() => {
     const savedPosition = localStorage.getItem(localStorageKey);
     return savedPosition ? JSON.parse(savedPosition) : { x: 0, y: 0 };
   });
@@ -81,6 +82,7 @@ function Note({ setNotes, noteData, loggedin }) {
     <Draggable position={position} onStop={handleStop}>
       <section className="note-section" style={{ borderColor: notesBorderColor }}>
         <div className="noteTitle">{note.title}</div>
+
         <div className="noteBody">{note.body}</div>
 
         {loggedin && (
@@ -92,7 +94,7 @@ function Note({ setNotes, noteData, loggedin }) {
 
         {edit && (
           <form onSubmit={handleSave} className="notesEditForm">
-            <input type="color" value={notesBorderColor} onChange={handleColorChange} />  {/* Color picker for border */}
+            <input type="color" value={notesBorderColor} onChange={handleColorChange} />
 
             <button className="notesEditSaveBtn" type="submit">
               Save

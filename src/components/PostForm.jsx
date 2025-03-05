@@ -11,7 +11,9 @@ function PostForm({ setPosts }) {
   const [fileName, handleFileChange] = useFileUpload();
   const [loading, setLoading] = useState(false);
   const [posted, setPosted] = useState(false);
-  const [error, setError] = useState(false);  // New error state
+  const [error, setError] = useState(false);
+
+
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ function PostForm({ setPosts }) {
 
     setLoading(true);
     setPosted(false);
-    setError(false);  // Reset error state
+    setError(false);
 
     const postTitle = e.target.title.value;
     const postBody = e.target.body.value;
@@ -49,13 +51,13 @@ function PostForm({ setPosts }) {
       } else {
         console.error("Post creation failed. No response ID found.");
         setPosted(false);
-        setError(true);  // Set error state to true
+        setError(true);
       }
     } catch (error) {
       console.error("Error creating post:", error);
       setPosted(false);
-      setError(true);  // Set error state to true
-    } finally {
+      setError(true);
+        } finally {
       setLoading(false);
     }
   };
@@ -66,7 +68,10 @@ function PostForm({ setPosts }) {
         <input className="titleInput" type="text" name="title" placeholder="Title" required />
         <textarea className="bodyInput" name="body" placeholder="Body" required />
 
+
         <section className="file-upload-container-outer">
+
+
           <div className="file-upload-container">
             <input
               id="choosefileBtn"
@@ -86,13 +91,11 @@ function PostForm({ setPosts }) {
               disabled={loading || posted}
             >
               {loading ? (
-                <>
-                  <FontAwesomeIcon icon={faCircleNotch} spin className="mr-2"/> Adding Post
-                </>
+                <>Adding Post<FontAwesomeIcon icon={faCircleNotch} spin className="mr-2"/></>
               ) : posted ? (
                 "Post Added"
               ) : error ? (
-                "Post Failed" // Error message
+                "Post Failed"
               ) : (
                 "Add Post"
               )}

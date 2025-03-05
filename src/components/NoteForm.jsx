@@ -2,9 +2,12 @@ import db from '../appwrite/databases';
 import PropTypes from 'prop-types';
 import "../styles/Note.css";
 import useClickOutside from '../hooks/useClickOutside';
+import {useState} from "react";
 
 function NoteForm({ setNotes, setNoteView }) {
   const formRef = useClickOutside(() => setNoteView(false));
+  const [textCount, setTextCount] = useState("");
+
 
 
   const handleAdd = async (e) => {
@@ -39,7 +42,10 @@ function NoteForm({ setNotes, setNoteView }) {
           className="noteBodyInput"
           name="body"
           placeholder="Body"
+          value={textCount}
+          onChange={(e) => setTextCount(e.target.value)}
         />
+         <div className="bodyInputCount">{textCount.length}/120</div>
         <button className="addNoteBtn" type="submit">
           Add note
         </button>

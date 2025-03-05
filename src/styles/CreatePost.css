@@ -85,7 +85,6 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-
   justify-self: center;
 }
 
@@ -104,6 +103,7 @@
   color: black;
   width: 130px;
   font-size: 14px;
+  gap: 5px;
 }
 
 .success-btn{
@@ -113,5 +113,4 @@
 
 .error-btn{
   background-color: rgb(210, 0, 0);
-
 }

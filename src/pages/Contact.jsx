@@ -10,6 +10,9 @@ import emailjs from "@emailjs/browser";
 
 function Contact({ loggedin, editIcon }) {
   const [edit, setEdit] = useState(false);
+  const [bgColor, setBgColor] = useState("whitesmoke");
+  const [messageColor, setMessageColor] = useState("whitesmoke");
+  const [contactColor, setContactColor] = useState("whitesmoke");
   const [contactinfo, setContactInfo] = useState({
     message: "",
     name: "",
@@ -22,6 +25,32 @@ function Contact({ loggedin, editIcon }) {
   // const linkedInIcon = <FontAwesomeIcon icon={faLinkedin} size="xl" />;
   const phoneIcon = <FontAwesomeIcon icon={faPhone} />;
   const editRef = useClickOutside(() => setEdit(false));
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      try {
+        const response = await db.contact.list();
+        if (response.documents.length > 0) {
+          const existingContact = response.documents[0];
+          setContactInfo({
+            message: existingContact.message,
+            name: existingContact.name,
+            email: existingContact.email,
+            phone: existingContact.phone,
+          });
+          setBgColor(existingContact.bgColor || "whitesmoke");
+          setMessageColor(existingContact.messageColor || "whitesmoke");
+          setContactColor(existingContact.contactColor || "whitesmoke");
+          setContactId(existingContact.$id);
+        }
+      } catch (error) {
+        console.error("Error fetching contact info:", error);
+      }
+    };
+
+    fetchContact();
+  }, []);
+
 
   useEffect(() => {
     const fetchContact = async () => {
@@ -62,6 +91,9 @@ function Contact({ loggedin, editIcon }) {
         name: contactName,
         email: contactEmail,
         phone: contactPhone,
+        bgColor,
+        messageColor,
+        contactColor,
       };
 
       if (contactId) {
@@ -83,13 +115,12 @@ function Contact({ loggedin, editIcon }) {
 
   const handleSendEmail = (e) => {
     e.preventDefault();
-
     emailjs
       .sendForm(
-        "service_l44cx0l", // Replace with your EmailJS service ID
-        "template_2a9fr0u", // Replace with your EmailJS template ID
+        "service_l44cx0l",
+        "template_2a9fr0u",
         emailForm.current,
-        "hR4COSO4qV4GDCZwK" // Replace with your EmailJS public key
+        "hR4COSO4qV4GDCZwK"
       )
       .then(
         (response) => {
@@ -116,12 +147,10 @@ function Contact({ loggedin, editIcon }) {
   };
 
   return (
-    <section className="contact-section">
-      <div className="contactH1Container">
+    <section className="contact-section" style={{backgroundColor: bgColor}}>
 
-      </div>
 
-      <div className="contact-div">
+      <div className="contact-div" style={{backgroundColor: contactColor}}>
         {loggedin && (
           <button onClick={handleEdit} className="contactEditIcon">
             {editIcon}
@@ -142,6 +171,24 @@ function Contact({ loggedin, editIcon }) {
 
       {edit && (
         <form onSubmit={handleAdd} className="contact-form" ref={editRef}>
+          <label>Background<input
+          type="color"
+          value={bgColor}
+          onChange={(e) => setBgColor(e.target.value)}/>
+          </label>
+
+          <label>Message box<input
+          type="color"
+          value={messageColor}
+          onChange={(e) => setMessageColor(e.target.value)}/>
+          </label>
+
+          <label>Contact box<input
+          type="color"
+          value={contactColor}
+          onChange={(e) => setContactColor(e.target.value)}/>
+          </label>
+
           <label>
             Message
             <input
@@ -193,17 +240,18 @@ function Contact({ loggedin, editIcon }) {
       )}
 
 
-      <div className="messageSection">
+      <div className="messageSection" style={{backgroundColor: messageColor}}>
       <p className="contactH1">Send me a message</p>
 
       <form ref={emailForm} onSubmit={handleSendEmail} className="emailForm">
+
         <label>
           Name:
           <input type="text" name="user_name" required />
         </label>
 
         <label>
-          Your Email:
+          Email:
           <input type="email" name="user_email" required />
         </label>
 
