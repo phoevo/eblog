@@ -1,4 +1,3 @@
-
 .note-section {
   display: flex;
   flex-direction: column;
@@ -18,33 +17,30 @@
   z-index: 3;
   font-family: 'Raleway', sans-serif;
   padding: 10px;
-}
 
+}
 
 .note-section:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-
-
-.note-section:active{
+.note-section:active {
   cursor: grabbing;
+  transform: scale(0.98);
 }
 
-
-.createNoteDropDown{
+.createNoteDropDown {
   display: flex;
   position: absolute;
   top: 50px;
   right: 80px;
-  box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.4);
   background-color: rgba(235, 235, 235);
   border-radius: 10px;
   z-index: 10;
 }
 
-
-.noteForm{
+.noteForm {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -55,119 +51,207 @@
   z-index: 10;
 }
 
-.noteTitleInput{
+.noteTitleInput,
+.noteBodyInput {
   display: flex;
   width: 100%;
-  height: 30px;
   border-radius: 8px;
   border: none;
   margin-top: 5px;
   font-family: 'Montserrat', sans-serif;
 }
 
+.noteTitleInput {
+  height: 30px;
+}
+
 .noteBodyInput {
-  display: flex;
-  width: 100%;
   height: 80px;
-  border-radius: 8px;
-  border: none;
-  margin-top: 5px;
-  font-family: 'Montserrat', sans-serif;
   word-wrap: break-word;
   white-space: pre-wrap;
   resize: none;
 }
 
-
-.noteTitle{
+.noteTitle {
   font-size: 20px;
   border-bottom: 1px solid black;
 }
 
-.addNoteBtn{
+.addNoteBtn {
   display: flex;
   align-items: center;
   align-self: center;
   justify-content: center;
-  height: 20px;
-  width: 90px;
+  height: 25px;
+  width: 100px;
   margin-top: 10px;
   background-color: black;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.noteDelete{
+.addNoteBtn:hover {
+  background-color: #333;
+}
+
+.noteDelete,
+.noteEditIcon {
   display: flex;
   justify-content: center;
   position: absolute;
-  width: 20px;
+  width: 25px;
   top: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: large;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.noteDelete {
   right: 5px;
-  background-color: transparent;
-  border: none;
-  font-size: large;
-  cursor: pointer;
-
 }
 
-.noteDelete:hover{
-  font-size: larger;
-}
-
-.noteEditIcon{
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  width: 20px;
-  top: 10px;
+.noteEditIcon {
   right: 30px;
-  background-color: transparent;
-  border: none;
-  font-size: large;
-  cursor: pointer;
 }
 
-.noteEditIcon:hover{
-  font-size: larger;
+.noteDelete:hover,
+.noteEditIcon:hover {
+  transform: scale(1.2);
 }
 
 .notesEditForm {
   display: flex;
   flex-direction: column;
-  justify-content:center;
-  align-items:center;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  gap: 0;
+  gap: 5px;
   top: 35px;
   right: 5px;
   height: 80px;
-  width: 60px;
+  width: 70px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
   background-color: rgba(235, 235, 235, 0.8);
   border-radius: 8px;
   z-index: 1;
+  padding: 5px;
 }
 
-.notesEditSaveBtn{
+.notesEditSaveBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 20px;
-  width: 50px;
-  margin-top: 30px;
+  height: 25px;
+  width: 60px;
   background-color: black;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.3s ease-in-out;
 }
 
-.bodyInputCount{
+.notesEditSaveBtn:hover {
+  background-color: #333;
+}
+
+.bodyInputCount {
   font-family: "Montserrat", sans-serif;
   color: grey;
   font-size: small;
   align-self: center;
+}
+
+/* Responsive Design */
+
+/* For Tablets */
+@media screen and (max-width: 768px) {
+  .note-section {
+    top: 50px;
+    left: 50px;
+    width: 220px;
+    height: 140px;
+  }
+
+  .noteTitle {
+    font-size: 18px;
+  }
+
+  .noteBodyInput {
+    height: 70px;
+  }
+
+  .addNoteBtn {
+    width: 90px;
+    height: 22px;
+    font-size: 12px;
+  }
+
+  .noteDelete,
+  .noteEditIcon {
+    font-size: medium;
+    width: 20px;
+  }
+
+  .notesEditForm {
+    width: 65px;
+    height: 75px;
+  }
+
+  .notesEditSaveBtn {
+    width: 55px;
+    height: 22px;
+    font-size: 12px;
+  }
+}
+
+/* For Mobile Phones */
+@media screen and (max-width: 480px) {
+  .note-section {
+    top: 10px;
+    left: 20px;
+    width: 45%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .noteTitle {
+    font-size: px;
+  }
+
+  .noteBody{
+    font-size: 14px;
+  }
+
+  .noteBodyInput {
+    height: 60px;
+  }
+
+  .addNoteBtn {
+    width: 85px;
+    height: 20px;
+    font-size: 11px;
+  }
+
+  .noteDelete,
+  .noteEditIcon {
+    font-size: small;
+    width: 18px;
+  }
+
+  .notesEditForm {
+    width: 60px;
+    height: 70px;
+  }
+
+  .notesEditSaveBtn {
+    width: 50px;
+    height: 20px;
+    font-size: 11px;
+  }
 }

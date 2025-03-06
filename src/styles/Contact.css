@@ -1,31 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-.app-content{
+
+.app-content {
   display: flex;
   flex-direction: column;
   height: 100vh;
-
 }
 
-.transitionGroup{
+.transitionGroup {
   display: flex;
   height: 100vh;
   margin: 0;
-
 }
+
 .contact-section {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
   font-family: 'Raleway', sans-serif;
-
   width: 100%;
   height: 100%;
   padding: 10px;
   gap: 20px;
 }
 
-.contactH1Container{
+.contactH1Container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,13 +33,13 @@
   left: 20px;
 }
 
-.contactH1{
+.contactH1 {
   font-family: 'Raleway', sans-serif;
   font-size: 30px;
   font-weight: 400;
 }
 
-.contact-message{
+.contact-message {
   font-weight: 400;
 }
 
@@ -52,7 +51,6 @@
   gap: 30px;
   word-wrap: break-word;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
-
   color: black;
   border-radius: 10px;
   font-size: 20px;
@@ -61,7 +59,7 @@
   min-height: 90%;
 }
 
-.messageSection{
+.messageSection {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -69,29 +67,26 @@
   width: 50%;
   min-height: 90%;
   font-family: 'Raleway', sans-serif;
-
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.3);
   border-radius: 10px;
-
 }
 
-.messageSection label{
+.messageSection label {
   font-weight: 600;
 }
 
-.emailForm{
+.emailForm {
   display: flex;
   flex-direction: column;
   width: 80%;
   gap: 20px;
 }
 
-
-.emailForm input{
+.emailForm input {
   display: flex;
   width: 100%;
   height: 30px;
-  border-radius: 05px;
+  border-radius: 5px;
   margin-top: 5px;
   font-family: 'Montserrat', sans-serif;
   border: 1px solid black;
@@ -110,7 +105,7 @@
   resize: none;
 }
 
-.emailForm button{
+.emailForm button {
   display: flex;
   justify-content: center;
   align-self: center;
@@ -127,24 +122,21 @@
   box-shadow: 0px 2px 4px 1px rgb(0, 0, 0, 0.3);
 }
 
-.emailForm button:active{
+.emailForm button:active {
   transform: translateY(1px);
   box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.3);
-
 }
 
-.contact-phone{
+.contact-phone {
   font-family: 'Montserrat', sans-serif;
 }
 
-
-.noteTitle{
+.noteTitle {
   font-size: 20px;
   border-bottom: 1px solid black;
 }
 
-
-.socialsBox{
+.socialsBox {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -154,47 +146,24 @@
   flex-grow: 1;
   width: 100%;
   background-color: black;
-  color:white;
+  color: white;
   font-weight: 300;
   border-radius: 0 0 10px 10px;
 }
 
-.socialsBox > h2{
+.socialsBox > h2 {
   font-weight: 400;
   font-family: 'Raleway';
 }
 
-.socialsLinks{
+.socialsLinks {
   display: flex;
   width: 100%;
   justify-content: space-evenly;
   align-items: center;
-
 }
 
-/* .facebookIcon svg{
-  color: rgb(66 103 178);
-  width: 25px;
-  height: 25px;
-}
-
-.instagramIcon svg{
-  color: white;
-  background: linear-gradient(-15deg, #d90028, #f58529, #fbbd0a, #d206e9);
-  width: 25px;
-  height: 25px;
-  border-radius: 4px;
-} */
-
-
-/* .socialsLinks > p{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-}
-*/
-.linkedInIcon svg{
+.linkedInIcon svg {
   color: #0072b1;
   width: 25px;
   height: 25px;
@@ -228,13 +197,13 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.contact-form label{
+.contact-form label {
   font-size: 15px;
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
 }
 
-.contactNumber{
+.contactNumber {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -252,8 +221,7 @@
   transition: 200ms;
 }
 
-
-.ContactSaveBtn{
+.ContactSaveBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -269,22 +237,70 @@
   box-shadow: 0px 2px 4px 1px rgb(0, 0, 0, 0.3);
 }
 
-.ContactSaveBtn:active{
+.ContactSaveBtn:active {
   transform: translateY(1px);
   box-shadow: 0px 0px 0px 0px rgb(0, 0, 0, 0.3);
-
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+
+  .transitionGroup{
+    display: flex;
+    align-items: flex-start;
+
+  }
   .contact-section {
-    min-height: auto;  /* Allow content to shrink */
-    padding: 10px;  /* Reduced padding for smaller screens */
+    flex-direction: column;
+    padding: 10px;
+    height: auto;
+    padding: 10px;
+
   }
 
   .contact-div {
     width: 100%;
-    max-width: 90%; /* Allow contact div to use more width on small screens */
+    max-width: 90%;
+    margin: 10px;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 400px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .contactH1Container {
+    position: static;
+    width: 100%;
+    text-align: center;
+  }
+
+  .emailForm input, .emailForm textarea {
+    font-size: 14px;
+  }
+
+  .emailForm button {
+    width: 80%;
+  }
+
+  .messageSection{
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    min-height: auto;
+    padding: 5px; /* Further reduced padding */
+  }
+
+  .contact-div {
+    width: 100%;
+    max-width: 90%;
     margin: 10px 0;
   }
 
@@ -298,5 +314,61 @@
 
   .ContactSaveBtn {
     width: 80%;
+  }
+
+  .contactH1 {
+    font-size: 24px;
+  }
+
+  .noteTitle {
+    font-size: 18px;
+  }
+
+  .emailForm input,
+  .emailForm textarea {
+    font-size: 14px;
+  }
+
+  .socialsBox {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 10px; /* Reduced padding for extra small screens */
+    flex-direction: column; /* Stack the sections vertically */
+  }
+
+  .contact-div {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 250px;
+    margin: 10px 0;
+  }
+
+  .ContactSaveBtn {
+    width: 70%;
+  }
+
+  .contactH1 {
+    font-size: 20px;
+  }
+
+  .emailForm input,
+  .emailForm textarea {
+    font-size: 12px;
+  }
+
+  .noteTitle {
+    font-size: 16px;
+  }
+
+  .socialsBox {
+    font-size: 12px;
   }
 }

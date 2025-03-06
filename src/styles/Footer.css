@@ -46,3 +46,52 @@ p{
   font-size: 30px;
   width: 300px;
 }
+
+
+@media screen and (max-width: 768px) {
+  .footer-section {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .footer-message {
+    gap: 30px;
+  }
+
+  .linkedInIcon {
+    width: 150px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
+
+/* For Mobile Phones */
+@media screen and (max-width: 480px) {
+  .footer-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .footer-message {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .linkedInIcon {
+    width: 100%;
+  }
+
+  a {
+    width: 100%;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 0;
+  }
+}
